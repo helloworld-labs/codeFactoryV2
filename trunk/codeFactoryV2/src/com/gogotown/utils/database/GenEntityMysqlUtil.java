@@ -117,6 +117,7 @@ public class GenEntityMysqlUtil {
 					pw.flush();
 					pw.close();
 				}
+				System.out.println("生成实体类："+file.getPath()+" 成功！");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -359,7 +360,6 @@ public class GenEntityMysqlUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("success:通过表生成实体类成功");
     	return tableEntity;
 	}
 	
