@@ -6,9 +6,9 @@ public class FileEntity {
 	*/ 
 	private String projectPath = null;
 	 /** 
-	* @Fields packageOutPath : 指定实体生成所在包的路径 
+	* @Fields basePackage : 指定实体生成所在包的根路径 
 	*/ 
-	private String packagePath = null;
+	private String basePackage = null;
 	 /** 
 	* @Fields authorName : 作者名字
 	*/ 
@@ -23,7 +23,7 @@ public class FileEntity {
 			String authorName, boolean is_cover) {
 		super();
 		this.projectPath = projectPath;
-		this.packagePath = packagePath;
+		this.basePackage = packagePath;
 		this.authorName = authorName;
 		this.is_cover = is_cover;
 	}
@@ -36,12 +36,12 @@ public class FileEntity {
 		this.projectPath = projectPath;
 	}
 
-	public String getPackagePath() {
-		return packagePath;
+	public String getBasePackage() {
+		return basePackage;
 	}
 
-	public void setPackagePath(String packagePath) {
-		this.packagePath = packagePath;
+	public void setBasePackage(String basePackage) {
+		this.basePackage = basePackage;
 	}
 
 	public String getAuthorName() {

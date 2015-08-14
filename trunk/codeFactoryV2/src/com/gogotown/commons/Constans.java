@@ -27,4 +27,16 @@ public interface Constans {
 	String ISCOVER = "isCover";
 	 /**@Fields PRIMARY_COLUMN_TAB : 表主键*/ 
 	String PRIMARY_COLUMN_TAB = "primary_column_tab";
+	////model、dao、service、action的名字//
+	String TYPE_MODEL = "model";
+	String TYPE_DAO = "dao";
+	String TYPE_SERVICE = "service";
+	String TYPE_ACTION = "action";
+	
+	//模版文件名称配置
+	String TEMPLATE_SERVICE = "service.ftl";
+	String TEMPLATE_ACTION = "action.ftl";
+	String TEMPLATE_DAO = "dao.ftl";
+	String TEMPLATE_LIST  = "list.ftl";
+	String TEMPLATE_EDIT = "edit.ftl";
 }
