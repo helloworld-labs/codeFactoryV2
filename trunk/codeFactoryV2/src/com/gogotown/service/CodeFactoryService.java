@@ -28,8 +28,8 @@ public class CodeFactoryService {
 		CreateCodeUtil.createCode(table, fileEntity);
 		//page
 		CreatePateUtil.createPage(table, fileEntity);
-		tablename = GoGoStringUtil.firstChar2Up(tablename);
-		String urlPattern = GoGoStringUtil.firstChar2Little(tablename);
+		tablename = GoGoStringUtil.firstChar2Up(table.getTablename());
+		String urlPattern = GoGoStringUtil.firstChar2Little(table.getTablename());
 		String fullClassPath = fileEntity.getBasePackage()+ "." +Constans.TYPE_ACTION+"."+ tablename +"Action";
 		//web.xml
 		XmlUtil.createWebXml(fileEntity, tablename, fullClassPath, urlPattern);
