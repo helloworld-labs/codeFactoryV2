@@ -25,7 +25,7 @@ public class CodeFactoryService {
 		//bean
 		TableEntity table = GenEntityMysqlUtil.generateEntityRun(tablename, dbEntity, fileEntity);
 		//code
-		CreateCodeUtil.createCode(table.getTablename(), table.getTable_description(), fileEntity);
+		CreateCodeUtil.createCode(table, fileEntity);
 		//page
 		CreatePateUtil.createPage(table, fileEntity);
 		tablename = GoGoStringUtil.firstChar2Up(tablename);
@@ -44,7 +44,7 @@ public class CodeFactoryService {
 		try {
 			DbEntity dbEntity = new DbEntity("com.mysql.jdbc.Driver", "jdbc:mysql://192.168.0.155:3306/lisendb", "root", "root");
 			String tablename = "admin";
-			FileEntity fileEntity = new FileEntity("E:/testpage/","com.lisen.entity","hezhoujun",false);
+			FileEntity fileEntity = new FileEntity("E:/testpage/","com.lisen.entity","hezhoujun",true);
 			codeGenerateRun(tablename, dbEntity, fileEntity);
 		} catch (Exception e) {
 			e.printStackTrace();

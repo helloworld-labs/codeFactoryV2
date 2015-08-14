@@ -21,7 +21,7 @@
 </div>
 <div class="ibox-content" style="display: block;">
 <form data="editForm" class="form-horizontal" id="saveObjForm">
- <input type="hidden"  name="apiId" value="${r"${"}${tableName}.id}">
+ <input type="hidden"  name="${primary_colmun?if_exists}" value="${r"${"}${tableName}.${primary_colmun?if_exists}}">
  <#list fieldNames as i>
  <div class="form-group">
      <label class="col-sm-2 control-label">${remarks[i_index]}</label>

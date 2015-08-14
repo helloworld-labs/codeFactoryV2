@@ -89,17 +89,19 @@ public class GenEntityMysqlUtil {
 			table.setF_util(f_util);
 			table.setRemaks(remaks);
 			table.setTable_description(table_description);
-			table.setTablename(tablename);
 			table.setColnames(colnames);
 			table.setColTypes(colTypes);
 			table.setFieldNames(fieldNames);
 			table.setFiledTypes(filedTypes);
+			table.setTablename(initcap(tablename));
 			
 			String content = parse(colnames,colTypes,colSizes,fileEntity,table);
 //			System.out.println(content);
 			//主键
 			table.setPrimary_colmun(columnComments.get(Constans.PRIMARY_COLUMN_TAB));
-				String document = GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), fileEntity.getBasePackage(), Constans.TYPE_MODEL);
+			String projectPath = fileEntity.getProjectPath();
+				projectPath = projectPath + ((projectPath.endsWith("/") || projectPath.endsWith("\\")) ? "java" : "/java");
+				String document = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_MODEL);
 				File d_file = new File(document);
 				if(!d_file.exists()) d_file.mkdirs();
 				String outputPath = document+initcap(tablename) + ".java";
@@ -140,7 +142,7 @@ public class GenEntityMysqlUtil {
 	private static String parse(String[] colnames, String[] colTypes, int[] colSizes,FileEntity fileEntity,TableEntity table) {
 		StringBuffer sb = new StringBuffer();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		sb.append("package " +fileEntity.getBasePackage() + ";\r\n");
+		sb.append("package " +fileEntity.getBasePackage() +"."+Constans.TYPE_MODEL+ ";\r\n");
 		//判断是否导入工具包
 		if(table.isF_util()){
 			sb.append("import java.util.Date;\r\n");
