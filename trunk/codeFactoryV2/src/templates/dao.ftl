@@ -1,4 +1,4 @@
-package ${base_packge}.${type_dao}
+package ${base_packge}.${type_dao};
 
 import ${base_packge}.${type_model}.${entityDomain?cap_first};
 
