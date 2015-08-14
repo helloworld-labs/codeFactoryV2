@@ -6,7 +6,7 @@ import com.gogotown.entity.FileEntity;
 import com.gogotown.entity.TableEntity;
 import com.gogotown.utils.GoGoStringUtil;
 import com.gogotown.utils.code.CreateCodeUtil;
-import com.gogotown.utils.database.GenEntityMysqlUtil;
+import com.gogotown.utils.database.CreateEntityUtil;
 import com.gogotown.utils.page.CreatePateUtil;
 import com.gogotown.utils.xml.XmlUtil;
 
@@ -23,7 +23,7 @@ public class CodeFactoryService {
 	*/
 	public static void codeGenerateRun(String tablename,DbEntity dbEntity,FileEntity fileEntity)throws Exception{
 		//bean
-		TableEntity table = GenEntityMysqlUtil.generateEntityRun(tablename, dbEntity, fileEntity);
+		TableEntity table = CreateEntityUtil.generateEntityRun(tablename, dbEntity, fileEntity);
 		//code
 		CreateCodeUtil.createCode(table, fileEntity);
 		//page
