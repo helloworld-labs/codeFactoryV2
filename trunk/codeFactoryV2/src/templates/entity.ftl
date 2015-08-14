@@ -1,5 +1,10 @@
 package ${base_packge}.${type_model};
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
 * @TableName: ${tablename} 
 * @Package: ${base_packge}.${type_model}
@@ -28,7 +33,7 @@ public class ${entityName}{
 		this.${field?uncap_first}=${field?uncap_first};
 	}
 
-	public Long get${field?cap_first}(){
+	public ${filedTypes[field_index]} get${field?cap_first}(){
 		return ${field?uncap_first};
 	}
 	</#list>
