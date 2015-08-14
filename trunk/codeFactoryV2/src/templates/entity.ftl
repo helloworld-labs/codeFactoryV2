@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import ${base_packge}.commons.BaseBean;
 
 /**
 * @TableName: ${tablename} 
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 */
 @Entity
 @Table(name="${tablename}")
-public class ${entityName}{
+public class ${entityName} extends BaseBean{
 	<#list fieldNames as field>
 	/**
 	*@Fields ${field} :${remaks[field_index]}
