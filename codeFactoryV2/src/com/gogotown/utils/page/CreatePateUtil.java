@@ -27,26 +27,26 @@ public class CreatePateUtil {
 	* @throws IOException void
 	*/
 	@SuppressWarnings("static-access")
-	public static void createPage(TableEntity table,FileEntity fileEntity,boolean isCover) throws IOException{
+	public static void createPage(TableEntity table,FileEntity fileEntity) throws IOException{
 		String tablename = GoGoStringUtil.firstChar2Little(table.getTablename());
 		PageEntity pageEntity = new PageEntity(Arrays.asList(table.getRemaks()),Arrays.asList(table.getFieldNames()),table.getTable_description(),tablename);
 		Map<String, Object> datamap = ObjectMapUtil.obj2Map(pageEntity);
 		String folder_name = GoGoStringUtil.firstChar2Little(table.getTablename());
 		//edit.jsp
-		String document_edit = GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), "src.main.webapp.WEB-INF.views",folder_name);
-		FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_EDIT,document_edit,"edit.jsp",datamap,isCover);
+		String document_edit = GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), Constans.WEB_JSP_PATH,folder_name);
+		FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_EDIT,document_edit,"edit.jsp",datamap,fileEntity.isIs_cover());
 		//list.jsp
-		String document_list = GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), "src.main.webapp.WEB-INF.views",folder_name);
-		FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_EDIT,document_list,"list.jsp",datamap,isCover);
+		String document_list = GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), Constans.WEB_JSP_PATH,folder_name);
+		FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_EDIT,document_list,"list.jsp",datamap,fileEntity.isIs_cover());
 	}
 	
 	public static void main(String[] args) {
 		try {
 			DbEntity dbConstans = new DbEntity("com.mysql.jdbc.Driver", "jdbc:mysql://192.168.0.155:3306/lisendb", "root", "root");
 			String tableName = "admin";
-			FileEntity fileEntity = new FileEntity("E:/test/hz/abc/def", "com.manage", "hezhoujun", true);
+			FileEntity fileEntity = new FileEntity("E:/test/hz/abc/def", "com.manage", "hezhoujun", false);
 			TableEntity table = GenEntityMysqlUtil.generateEntityRun(tableName,dbConstans,fileEntity);
-			createPage(table,fileEntity,true);
+			createPage(table,fileEntity);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

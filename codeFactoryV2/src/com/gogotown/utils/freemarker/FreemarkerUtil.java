@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +27,6 @@ public class FreemarkerUtil {
 	*/
 	public static void analysisTemplate(String templateName,String distinctPath,String distinctName,Map<?,?> datamap,boolean isCover) throws IOException{
 		BufferedWriter bw = null;
-		StringWriter sw = null;
 		//生成文件保存的位置(完整路径:example:e:/xx/xx/xxActino.java)
 		File distinctFile = getDistinctFile(distinctPath, distinctName,isCover);
 		if(distinctFile == null){
@@ -50,11 +48,8 @@ public class FreemarkerUtil {
 				//输出到控制台
 				//Writer out = new OutputStreamWriter(System.out);  
 				//返回字符串
-			  sw = new StringWriter();
-			  template.process(datamap, sw);
 			  bw = new BufferedWriter(new FileWriter(distinctFile));
-			  bw.write(sw.toString());
-			  sw.flush();
+			  template.process(datamap, bw);
 			  bw.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -63,9 +58,6 @@ public class FreemarkerUtil {
 			}finally{
 				if(bw != null){
 					bw.close();
-				}
-				if(sw != null){
-					sw.close();
 				}
 			}
 			System.out.println("创建文件:"+distinctFile.getPath()+" 成功！");

@@ -2,7 +2,6 @@ package com.gogotown.utils.database;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -100,7 +99,6 @@ public class GenEntityMysqlUtil {
 //			System.out.println(content);
 			//主键
 			table.setPrimary_colmun(columnComments.get(Constans.PRIMARY_COLUMN_TAB));
-			try {
 				String document = GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), fileEntity.getBasePackage(), Constans.TYPE_MODEL);
 				File d_file = new File(document);
 				if(!d_file.exists()) d_file.mkdirs();
@@ -109,19 +107,15 @@ public class GenEntityMysqlUtil {
 				// 默认情况下已经存在的文件不需要生成代码
 				//是否覆盖 true：覆盖
 				if (fileEntity.isIs_cover() || !file.exists()) {
-//					System.out.println("entity:"+outputPath);
-//					fileNotExists = true;
-					//将生成的java文件写到指定位置
 					FileWriter fw = new FileWriter(file);
 					PrintWriter pw = new PrintWriter(fw);
 					pw.println(content);
 					pw.flush();
 					pw.close();
+					System.out.println("生成实体类："+file.getPath()+" 成功！");
+				}else{
+					System.err.println("文件："+outputPath+" 已经存在.");
 				}
-				System.out.println("生成实体类："+file.getPath()+" 成功！");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
