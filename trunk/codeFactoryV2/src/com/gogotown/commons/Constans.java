@@ -39,4 +39,7 @@ public interface Constans {
 	String TEMPLATE_DAO = "dao.ftl";
 	String TEMPLATE_LIST  = "list.ftl";
 	String TEMPLATE_EDIT = "edit.ftl";
+	
+	String WEB_XML_PATH = "src.main.webapp.WEB-INF";
+	String WEB_JSP_PATH = "src.main.webapp.WEB-INF.views";
 }
