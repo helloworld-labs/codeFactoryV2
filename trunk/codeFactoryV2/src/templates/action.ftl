@@ -85,7 +85,7 @@ public class ${entityDomain?cap_first}Action extends HttpServlet{
 		try {
 			String id = req.getParameter("id");
 			if(StringUtils.isNotBlank(id) && StringUtils.isNumber(id)){
-				${entityDomain?cap_first} ${entityDomain} = ApiService.getById(Long.parseLong(id));
+				${entityDomain?cap_first} ${entityDomain} = ${entityDomain?cap_first}Service.getById(Long.parseLong(id));
 				req.setAttribute("${entityDomain}", ${entityDomain});
 			}
 			req.getRequestDispatcher(SysConstants.PAGE_BASE_PATH+actionFilePath+"/edit.jsp").forward(req, resp);
@@ -105,13 +105,15 @@ public class ${entityDomain?cap_first}Action extends HttpServlet{
 		int code = 0;
 		try {
 			${entityDomain?cap_first} ${entityDomain} = ReflectionModelUtil.getObjectModelRequest(${entityDomain?cap_first}.class, req);
+			<#if primary_colmun?exists>
 			//修改
-			if(null != ${entityDomain}.getId() && ${entityDomain}.getId() > 0){
+			if(null != ${entityDomain}.get${primary_colmun}() && ${entityDomain}.get${primary_colmun}() > 0){
 				${entityDomain?cap_first}Service.update(${entityDomain});
 			}else{
 			//保存
 				${entityDomain} = ${entityDomain?cap_first}Service.save(${entityDomain});
 			}
+			</#if>
 			code = 1;
 			String result = JsonUtil.returnJsonInfo(code, "");
 			resp.getWriter().print(result);

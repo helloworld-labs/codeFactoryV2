@@ -49,7 +49,7 @@ public class ${entityDomain?cap_first}Service {
 	public static ResultData list(Map<String, Object> maps) throws Exception{
 		ResultData data = new ResultData();
 		try {
-			int count = ApiDao.qryListObjectCount(Api.class, maps);
+			int count = ${entityDomain?cap_first}Dao.qryListObjectCount(Api.class, maps);
 			int currentpage = (int) maps.get("current");
 			int pagesize =(int) maps.get("pageSize");
 			int pages = count%pagesize == 0 ? count / pagesize : count/pagesize +1;

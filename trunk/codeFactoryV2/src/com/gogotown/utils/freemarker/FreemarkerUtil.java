@@ -34,9 +34,12 @@ public class FreemarkerUtil {
 		}else{
 			try {
 				Configuration config=new Configuration();
-				File file=new File("src/templates");
+//				String path = FreemarkerUtil.class.getResource("/").toString();
+				config.setClassForTemplateLoading(FreemarkerUtil.class, "/templates");
+//				path = path.replaceAll("file:/", "");
+//				File file=new File(path);
 				//设置要解析的模板所在的目录，并加载模板文件
-				config.setDirectoryForTemplateLoading(file);
+//				config.setDirectoryForTemplateLoading(file);
 				//设置包装器，并将对象包装为数据模型
 				config.setObjectWrapper(new DefaultObjectWrapper());
 				

@@ -34,6 +34,7 @@ public class CreatePateUtil {
 		String folder_name = GoGoStringUtil.firstChar2Little(table.getTablename());
 		//edit.jsp
 		String document_edit = GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), Constans.WEB_JSP_PATH,folder_name);
+		datamap.put("primary_colmun", table.getPrimary_colmun());
 		FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_EDIT,document_edit,"edit.jsp",datamap,fileEntity.isIs_cover());
 		//list.jsp
 		String document_list = GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), Constans.WEB_JSP_PATH,folder_name);

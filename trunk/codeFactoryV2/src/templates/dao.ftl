@@ -11,6 +11,6 @@ import ${base_packge}.${type_model}.${entityDomain?cap_first};
 * @version V1.0   
 * create by codeFactory
 */
-public interface ${entityDomain?cap_first}Dao extends BaseDao<${entityDomain?cap_first}>{
+public class ${entityDomain?cap_first}Dao extends BaseDao<${entityDomain?cap_first}>{
 
 }
