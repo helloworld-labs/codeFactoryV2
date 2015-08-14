@@ -38,7 +38,7 @@ public class CreatePateUtil {
 		FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_EDIT,document_edit,"edit.jsp",datamap,fileEntity.isIs_cover());
 		//list.jsp
 		String document_list = GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), Constans.WEB_JSP_PATH,folder_name);
-		FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_EDIT,document_list,"list.jsp",datamap,fileEntity.isIs_cover());
+		FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_LIST,document_list,"list.jsp",datamap,fileEntity.isIs_cover());
 	}
 	
 	public static void main(String[] args) {
