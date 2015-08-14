@@ -51,7 +51,7 @@
 			      <td >
 			      	<div class="btn-group" role="group" >				      		      		 
 		          	    <a class="btn icon-minus-sign"  href="javascript:del('${r"$"}{obj.id }');" role="button" >删除</a>		         	   
-		          	    <a class="btn icon-edit" href="edit?apiId=${r"$"}{obj.apiId }&operation=edit" role="button">编辑</a>
+		          	    <a class="btn icon-edit" href="edit?id=${r"$"}{obj.${primary_colmun?if_exists}}&operation=edit" role="button">编辑</a>
           			</div>
 			      </td>
                 </tr>
