@@ -17,6 +17,7 @@ import com.gogotown.commons.Constans;
 import com.gogotown.entity.DbEntity;
 import com.gogotown.entity.FileEntity;
 import com.gogotown.entity.TableEntity;
+import com.gogotown.utils.GoGoStringUtil;
 
 /**   
 * @Title: GenEntityMysqlUtil.java 
@@ -100,7 +101,7 @@ public class GenEntityMysqlUtil {
 			//主键
 			table.setPrimary_colmun(columnComments.get(Constans.PRIMARY_COLUMN_TAB));
 			try {
-				String document = fileEntity.getProjectPath() + fileEntity.getPackagePath().replace(".", "/")+"/";
+				String document = GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), fileEntity.getBasePackage(), Constans.TYPE_MODEL);
 				File d_file = new File(document);
 				if(!d_file.exists()) d_file.mkdirs();
 				String outputPath = document+initcap(tablename) + ".java";
@@ -145,7 +146,7 @@ public class GenEntityMysqlUtil {
 	private static String parse(String[] colnames, String[] colTypes, int[] colSizes,FileEntity fileEntity,TableEntity table) {
 		StringBuffer sb = new StringBuffer();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		sb.append("package " +fileEntity.getPackagePath() + ";\r\n");
+		sb.append("package " +fileEntity.getBasePackage() + ";\r\n");
 		//判断是否导入工具包
 		if(table.isF_util()){
 			sb.append("import java.util.Date;\r\n");
@@ -160,7 +161,7 @@ public class GenEntityMysqlUtil {
 		//注释部分
 		sb.append("/**\r\n");
 		sb.append("* @TableName: "+table.getTablename()+" \r\n");
-		sb.append("* @Package: "+fileEntity.getPackagePath()+" \r\n");
+		sb.append("* @Package: "+fileEntity.getBasePackage()+" \r\n");
 		sb.append("* @Title:"+initcap(table.getTablename())+".java \r\n");
 		sb.append("* @Description: "+table.getTable_description()+" \r\n");
 		sb.append("* @author: "+fileEntity.getAuthorName()+" \r\n");

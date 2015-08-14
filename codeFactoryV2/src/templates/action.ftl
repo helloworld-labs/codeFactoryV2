@@ -1,26 +1,32 @@
-package ${action_package};
+package ${base_packge}.${type_action};
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.log4j.Logger;
+import ${base_packge}.commons.ResultData;
+import ${base_packge}.constant.SysConstants;
+import ${base_packge}.${type_model}.${entityDomain?cap_first};
+import ${base_packge}.${type_service}.${entityDomain?cap_first}Service;
+import ${base_packge}.util.ObjectMapUtil;
+import ${base_packge}.util.ReflectionModelUtil;
+import ${base_packge}.util.StringUtils;
+import ${base_packge}.util.json.JsonUtil;
+import ${base_packge}.util.log.util.CustomerLogUtil;
 
-import com.gogotown.api.manage.commons.ResultData;
-import com.gogotown.api.manage.constant.SysConstants;
-import ${entity_package}.${entityDomain?cap_first};
-import com.gogotown.api.manage.service.${entityDomain?cap_first}Service;
-import com.gogotown.api.manage.util.ObjectMapUtil;
-import com.gogotown.api.manage.util.ReflectionModelUtil;
-import com.gogotown.api.manage.util.StringUtils;
-import com.gogotown.api.manage.util.json.JsonUtil;
-import com.gogotown.api.manage.util.log.util.CustomerLogUtil;
-
+/**   
+* @Title: ${entityDomain?cap_first}Action.java 
+* @Package ${base_packge}.${type_action}
+* @Description: ${table_description}
+* @author ${author}
+* @date ${current_now}
+* @version V1.0   
+* create by codeFactory
+*/
 public class ${entityDomain?cap_first}Action extends HttpServlet{
 	Logger logger = Logger.getLogger(${entityDomain?cap_first}Action.class);
 	
