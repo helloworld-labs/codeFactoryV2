@@ -26,15 +26,12 @@ public class CreatePateUtil {
 	* @param datamap
 	* @throws IOException void
 	*/
-	@SuppressWarnings("static-access")
 	public static void createPage(TableEntity table,FileEntity fileEntity) throws IOException{
-		String tablename = GoGoStringUtil.firstChar2Little(table.getTablename());
-		PageEntity pageEntity = new PageEntity(Arrays.asList(table.getRemaks()),Arrays.asList(table.getFieldNames()),table.getTable_description(),tablename);
+		PageEntity pageEntity = new PageEntity(table);
 		Map<String, Object> datamap = ObjectMapUtil.obj2Map(pageEntity);
 		String folder_name = GoGoStringUtil.firstChar2Little(table.getTablename());
 		//edit.jsp
 		String document_edit = GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), Constans.WEB_JSP_PATH,folder_name);
-		datamap.put("primary_colmun", table.getPrimary_colmun());
 		FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_EDIT,document_edit,"edit.jsp",datamap,fileEntity.isIs_cover());
 		//list.jsp
 		String document_list = GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), Constans.WEB_JSP_PATH,folder_name);

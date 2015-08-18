@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>${table_description}列表</title>
+<title>${table.table_description}列表</title>
 <jsp:include page="../commons/head.jsp"/>
 </head>
 <body>
@@ -36,22 +36,29 @@
             <table class="table table-striped table-bordered table-hover dataTables-example dataTable table-condensed" id="DataTables_Table_0">
                 <thead>
                     <tr>
-                    <#list fieldNames as i>
-					<th width="5%">${remarks[i_index]}</th>
+                    <#list table.fieldNames as i>
+					<th>${table.remaks[i_index]}</th>
                     </#list>
-                  <th style="text-align: center;" >操作</th>
+                  <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${r"$"}{resultData.data}" var="obj" varStatus="i">
                   <tr>
-                  <#list fieldNames as i>
-	     		 <td>${r"$"}{obj.${fieldNames[i_index]}}</td>
+                  <#list table.fieldNames as i>
+	     		 <td>
+	     		 <#if table.filedTypes[i_index] == "Date">
+	     		 <fmt:formatDate value="${r"$"}{obj.${table.fieldNames[i_index]}}" pattern="yyyy-MM-dd HH:mm:ss"/>
+	     		 </#if>
+	     		 <#if table.filedTypes[i_index] != "Date">
+	     		 ${r"$"}{obj.${table.fieldNames[i_index]}}
+	     		 </#if>
+	     		 </td>
                   </#list>
 			      <td >
 			      	<div class="btn-group" role="group" >				      		      		 
-		          	    <a class="btn icon-minus-sign"  href="javascript:del('${r"$"}{obj.id }');" role="button" >删除</a>		         	   
-		          	    <a class="btn icon-edit" href="edit?id=${r"$"}{obj.${primary_colmun?if_exists}}&operation=edit" role="button">编辑</a>
+		          	    <a class="btn icon-minus-sign"  href="javascript:del('${r"$"}{obj.${table.primary_colmun} }');" role="button" >删除</a>		         	   
+		          	    <a class="btn icon-edit" href="edit?id=${r"$"}{obj.${table.primary_colmun?if_exists}}&operation=edit" role="button">编辑</a>
           			</div>
 			      </td>
                 </tr>

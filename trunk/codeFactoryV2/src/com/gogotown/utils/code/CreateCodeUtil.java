@@ -31,13 +31,13 @@ public class CreateCodeUtil {
 	*/
 	public static void createCode(TableEntity table,FileEntity fileEntity){
 		try {
-			String tableName = table.getTablename();
+			String entityName = table.getEntityName();
 			String tableDesc = table.getTable_description();
 			if(null != fileEntity){
 				//adminAction
-				String littleEntityName = GoGoStringUtil.firstChar2Little(tableName);
+				String littleEntityName = GoGoStringUtil.firstChar2Little(entityName);
 				//AdminAction
-				String bigEntityName = GoGoStringUtil.firstChar2Up(tableName);
+				String bigEntityName = GoGoStringUtil.firstChar2Up(entityName);
 				//封装datamap实体类
 				CodeEntity codeEntity = new CodeEntity(tableDesc, fileEntity.getBasePackage(), littleEntityName,fileEntity.getAuthorName());
 				Map<String, Object> datamap = ObjectMapUtil.obj2Map(codeEntity);

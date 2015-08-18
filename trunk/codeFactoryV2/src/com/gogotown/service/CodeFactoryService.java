@@ -28,11 +28,11 @@ public class CodeFactoryService {
 		CreateCodeUtil.createCode(table, fileEntity);
 		//page
 		CreatePateUtil.createPage(table, fileEntity);
-		tablename = GoGoStringUtil.firstChar2Up(table.getTablename());
-		String urlPattern = GoGoStringUtil.firstChar2Little(table.getTablename());
-		String fullClassPath = fileEntity.getBasePackage()+ "." +Constans.TYPE_ACTION+"."+ tablename +"Action";
+		String entityName = GoGoStringUtil.firstChar2Up(table.getEntityName());
+		String urlPattern = GoGoStringUtil.firstChar2Little(table.getEntityName());
+		String fullClassPath = fileEntity.getBasePackage()+ "." +Constans.TYPE_ACTION+"."+ entityName +"Action";
 		//web.xml
-		XmlUtil.createWebXml(fileEntity, tablename, fullClassPath, urlPattern);
+		XmlUtil.createWebXml(fileEntity, entityName, fullClassPath, urlPattern);
 	}
 	
 	public static void main(String[] args){

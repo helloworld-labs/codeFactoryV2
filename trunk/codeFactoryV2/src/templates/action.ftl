@@ -57,7 +57,7 @@ public class ${entityDomain?cap_first}Action extends HttpServlet{
 	* @param req
 	* @param resp void
 	*/
-	void list(HttpServletRequest req,HttpServletResponse resp){
+	void list(HttpServletRequest req,HttpServletResponse resp) throws IOException{
 		try {
 			${entityDomain?cap_first} ${entityDomain} = ReflectionModelUtil.getObjectModelRequest(${entityDomain?cap_first}.class, req);
 			Map<String, Object> maps = ObjectMapUtil.obj2Map(${entityDomain});
@@ -71,6 +71,7 @@ public class ${entityDomain?cap_first}Action extends HttpServlet{
 			req.getRequestDispatcher(SysConstants.PAGE_BASE_PATH+actionFilePath+"/list.jsp").forward(req, resp);
 		} catch (Exception e) {
 			CustomerLogUtil.hezhoujunLog(logger, "查询列表出错，error："+e.getMessage(), e.fillInStackTrace());
+			resp.getWriter().print(JsonUtil.returnJsonInfo(500, e.getMessage()));
 		}
 	}
 	
@@ -81,7 +82,7 @@ public class ${entityDomain?cap_first}Action extends HttpServlet{
 	* @param req
 	* @param resp void
 	*/
-	void edit(HttpServletRequest req,HttpServletResponse resp){
+	void edit(HttpServletRequest req,HttpServletResponse resp) throws IOException{
 		try {
 			String id = req.getParameter("id");
 			if(StringUtils.isNotBlank(id) && StringUtils.isNumber(id)){
@@ -91,6 +92,7 @@ public class ${entityDomain?cap_first}Action extends HttpServlet{
 			req.getRequestDispatcher(SysConstants.PAGE_BASE_PATH+actionFilePath+"/edit.jsp").forward(req, resp);
 		} catch (Exception e) {
 			CustomerLogUtil.hezhoujunLog(logger, "到编辑页面出错，error："+e.getMessage(), e.fillInStackTrace());
+			resp.getWriter().print(JsonUtil.returnJsonInfo(500, e.getMessage()));
 		}
 	}
 	
@@ -101,8 +103,9 @@ public class ${entityDomain?cap_first}Action extends HttpServlet{
 	* @param request
 	* @param response void
 	*/
-	void save(HttpServletRequest req,HttpServletResponse resp){
+	void save(HttpServletRequest req,HttpServletResponse resp) throws IOException{
 		int code = 0;
+		String result = null;
 		try {
 			${entityDomain?cap_first} ${entityDomain} = ReflectionModelUtil.getObjectModelRequest(${entityDomain?cap_first}.class, req);
 			<#if primary_colmun?exists>
@@ -115,11 +118,13 @@ public class ${entityDomain?cap_first}Action extends HttpServlet{
 			}
 			</#if>
 			code = 1;
-			String result = JsonUtil.returnJsonInfo(code, "");
+			result = JsonUtil.returnJsonInfo(code, "");
 			resp.getWriter().print(result);
 		} catch (Exception e) {
+			result = JsonUtil.returnJsonInfo(500, e.getMessage());
 			CustomerLogUtil.hezhoujunLog(logger, "保存出错，error："+e.getMessage(), e.fillInStackTrace());
 		}
+		resp.getWriter().print(result);
 	}
 	
 	/** 
@@ -129,18 +134,21 @@ public class ${entityDomain?cap_first}Action extends HttpServlet{
 	* @param request
 	* @param response void
 	*/
-	void delete(HttpServletRequest req,HttpServletResponse resp){
+	void delete(HttpServletRequest req,HttpServletResponse resp) throws IOException{
+		PrintWriter out = resp.getWriter();
 		String id = req.getParameter("id");
+		String result = null;
 		int code = 0;
 		if(StringUtils.isNotBlank(id) && StringUtils.isNumber(id)){
 			try {
-				PrintWriter out = resp.getWriter();
 				int n = ${entityDomain?cap_first}Service.delete(Long.parseLong(id));
 				code = n > 0 ? 1 : 0;
-				out.print(JsonUtil.returnJsonInfo(code, ""));
+				result = JsonUtil.returnJsonInfo(code, "");
 			}  catch (Exception e) {
+				result = JsonUtil.returnJsonInfo(500, e.getMessage());
 				CustomerLogUtil.hezhoujunLog(logger, "删除出错，error："+e.getMessage(), e.fillInStackTrace());
 			}
 		}
+		out.print(result);
 	}
 }

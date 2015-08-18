@@ -12,15 +12,15 @@ public class TableEntity {
 		 /** 
 		* @Fields colnames :列名类型数组
 		*/ 
-		private static String[] colnames; 
+		private String[] colnames; 
 		 /** 
 		* @Fields colTypes : 列名类型数组
 		*/ 
-		private static String[] colTypes; 
+		private String[] colTypes; 
 		 /** 
 		* @Fields filedTypes : 对应实体类的类型
 		*/ 
-		private static String[] filedTypes;
+		private String[] filedTypes;
 		 /** 
 		* @Fields remaks :列注释
 		*/ 
@@ -43,7 +43,12 @@ public class TableEntity {
 		 /** 
 		* @Fields fieldNames : 实体类字段数组
 		*/ 
-		private static String[] fieldNames;
+		private String[] fieldNames;
+		 /**@Fields table_filelds : 表字段数组*/ 
+		private String[] table_filelds;
+		 /**@Fields entityName : 实体类名称*/ 
+		private String entityName;
+		
 		public String getTablename() {
 			return tablename;
 		}
@@ -55,24 +60,6 @@ public class TableEntity {
 		}
 		public void setTable_description(String table_description) {
 			this.table_description = table_description;
-		}
-		public static String[] getColnames() {
-			return colnames;
-		}
-		public static void setColnames(String[] colnames) {
-			TableEntity.colnames = colnames;
-		}
-		public static String[] getColTypes() {
-			return colTypes;
-		}
-		public static void setColTypes(String[] colTypes) {
-			TableEntity.colTypes = colTypes;
-		}
-		public static String[] getFiledTypes() {
-			return filedTypes;
-		}
-		public static void setFiledTypes(String[] filedTypes) {
-			TableEntity.filedTypes = filedTypes;
 		}
 		public String[] getRemaks() {
 			return remaks;
@@ -104,17 +91,47 @@ public class TableEntity {
 		public void setF_math(boolean f_math) {
 			this.f_math = f_math;
 		}
-		public static String[] getFieldNames() {
-			return fieldNames;
-		}
-		public static void setFieldNames(String[] fieldNames) {
-			TableEntity.fieldNames = fieldNames;
-		}
 		public String getPrimary_colmun() {
 			return primary_colmun;
 		}
 		public void setPrimary_colmun(String primary_colmun) {
 			this.primary_colmun = primary_colmun;
+		}
+		public String[] getColnames() {
+			return colnames;
+		}
+		public void setColnames(String[] colnames) {
+			this.colnames = colnames;
+		}
+		public String[] getColTypes() {
+			return colTypes;
+		}
+		public void setColTypes(String[] colTypes) {
+			this.colTypes = colTypes;
+		}
+		public String[] getFiledTypes() {
+			return filedTypes;
+		}
+		public void setFiledTypes(String[] filedTypes) {
+			this.filedTypes = filedTypes;
+		}
+		public String[] getFieldNames() {
+			return fieldNames;
+		}
+		public void setFieldNames(String[] fieldNames) {
+			this.fieldNames = fieldNames;
+		}
+		public String[] getTable_filelds() {
+			return table_filelds;
+		}
+		public void setTable_filelds(String[] table_filelds) {
+			this.table_filelds = table_filelds;
+		}
+		public String getEntityName() {
+			return entityName;
+		}
+		public void setEntityName(String entityName) {
+			this.entityName = entityName;
 		}
 		
 }
