@@ -10,9 +10,15 @@
 <%@include file="../commons/tip_info.jsp" %>
 <div class="pd30">
 <form id="searchForm" action="list" method="post" class="form-inline" >
-    <a class="btn btn-success" href="edit">添加</a>
-    <input type="text" class="form-control lg-width" placeholder="输入关键字" name="" value="" />
-    <button type="submit" class="btn btn-info">查询</button>
+<div class="row">
+<div class="col-md-9">
+ <a class="btn btn-success" href="edit">添加</a>
+</div>
+<div class="col-md-3">
+<input type="text" class="form-control lg-width" placeholder="输入关键字" name="" value="" />
+<button type="submit" class="btn btn-info">查询</button>
+</div>
+</div>
 </form>
 <table class="table table-bordered text-center mgt10">
 <thead>
