@@ -4,12 +4,8 @@ import com.gogotown.commons.Constans;
 import com.gogotown.utils.DateUtil;
 
 public class CodeEntity {
-	 /**@Fields table_description : 表描述*/ 
-	private String table_description;
 	 /**@Fields base_packge : 项目包根路径*/ 
 	private String base_packge;
-	 /**@Fields entityDomain : 实体类类名(首字母小写)*/ 
-	private String entityDomain;
 	 /**@Fields current_now : 当前时间*/ 
 	private String current_now;
 	 /**@Fields author : 作者*/ 
@@ -19,38 +15,25 @@ public class CodeEntity {
 	private String type_service;
 	private String type_model;
 	private String type_dao;
+	private TableEntity table;
 	
-	public CodeEntity(String table_description, String base_packge,
-			String entityDomain,String author) {
+	public CodeEntity(TableEntity table, String base_packge,String author) {
 		super();
-		this.table_description = table_description;
 		this.base_packge = base_packge;
-		this.entityDomain = entityDomain;
 		this.current_now = DateUtil.getCurrentTime();
 		this.author = author;
 		this.type_action = Constans.TYPE_ACTION;
 		this.type_dao = Constans.TYPE_DAO;
 		this.type_model = Constans.TYPE_MODEL;
 		this.type_service = Constans.TYPE_SERVICE;
+		this.table = table;
 	}
 	
-	public String getTable_description() {
-		return table_description;
-	}
-	public void setTable_description(String table_description) {
-		this.table_description = table_description;
-	}
 	public String getBase_packge() {
 		return base_packge;
 	}
 	public void setBase_packge(String base_packge) {
 		this.base_packge = base_packge;
-	}
-	public String getEntityDomain() {
-		return entityDomain;
-	}
-	public void setEntityDomain(String entityDomain) {
-		this.entityDomain = entityDomain;
 	}
 	public String getCurrent_now() {
 		return current_now;
@@ -95,6 +78,14 @@ public class CodeEntity {
 
 	public void setType_dao(String type_dao) {
 		this.type_dao = type_dao;
+	}
+
+	public TableEntity getTable() {
+		return table;
+	}
+
+	public void setTable(TableEntity table) {
+		this.table = table;
 	}
 	
 }
