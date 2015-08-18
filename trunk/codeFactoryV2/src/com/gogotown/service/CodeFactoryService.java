@@ -42,7 +42,7 @@ public class CodeFactoryService {
 			String projectPath = (realPath + "src/main/").replaceAll("file:/", "");
 		 * */
 		try {
-			DbEntity dbEntity = new DbEntity("com.mysql.jdbc.Driver", "jdbc:mysql://192.168.0.155:3306/lisendb", "root", "root");
+			DbEntity dbEntity = new DbEntity("com.mysql.jdbc.Driver", "jdbc:mysql://192.168.2.103:3306/lisendb", "root", "root");
 			String tablename = "admin";
 			FileEntity fileEntity = new FileEntity("E:/testpage/","com.lisen.entity","hezhoujun",true);
 			codeGenerateRun(tablename, dbEntity, fileEntity);
