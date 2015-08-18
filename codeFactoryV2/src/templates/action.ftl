@@ -70,7 +70,7 @@ public class ${table.entityName?cap_first}Action extends HttpServlet{
 			req.setAttribute("operation_result", req.getParameter("result"));
 			req.getRequestDispatcher(SysConstants.PAGE_BASE_PATH+actionFilePath+"/list.jsp").forward(req, resp);
 		} catch (Exception e) {
-			CustomerLogUtil.hezhoujunLog(logger, "查询列表出错，error："+e.getMessage(), e.fillInStackTrace());
+			CustomerLogUtil.${author}Log(logger, "查询列表出错，error："+e.getMessage(), e.fillInStackTrace());
 			resp.getWriter().print(JsonUtil.returnJsonInfo(500, e.getMessage()));
 		}
 	}
@@ -91,7 +91,7 @@ public class ${table.entityName?cap_first}Action extends HttpServlet{
 			}
 			req.getRequestDispatcher(SysConstants.PAGE_BASE_PATH+actionFilePath+"/edit.jsp").forward(req, resp);
 		} catch (Exception e) {
-			CustomerLogUtil.hezhoujunLog(logger, "到编辑页面出错，error："+e.getMessage(), e.fillInStackTrace());
+			CustomerLogUtil.${author}Log(logger, "到编辑页面出错，error："+e.getMessage(), e.fillInStackTrace());
 			resp.getWriter().print(JsonUtil.returnJsonInfo(500, e.getMessage()));
 		}
 	}
@@ -119,10 +119,9 @@ public class ${table.entityName?cap_first}Action extends HttpServlet{
 			</#if>
 			code = 1;
 			result = JsonUtil.returnJsonInfo(code, "");
-			resp.getWriter().print(result);
 		} catch (Exception e) {
 			result = JsonUtil.returnJsonInfo(500, e.getMessage());
-			CustomerLogUtil.hezhoujunLog(logger, "保存出错，error："+e.getMessage(), e.fillInStackTrace());
+			CustomerLogUtil.${author}Log(logger, "保存出错，error："+e.getMessage(), e.fillInStackTrace());
 		}
 		resp.getWriter().print(result);
 	}
@@ -146,7 +145,7 @@ public class ${table.entityName?cap_first}Action extends HttpServlet{
 				result = JsonUtil.returnJsonInfo(code, "");
 			}  catch (Exception e) {
 				result = JsonUtil.returnJsonInfo(500, e.getMessage());
-				CustomerLogUtil.hezhoujunLog(logger, "删除出错，error："+e.getMessage(), e.fillInStackTrace());
+				CustomerLogUtil.${author}Log(logger, "删除出错，error："+e.getMessage(), e.fillInStackTrace());
 			}
 		}
 		out.print(result);
