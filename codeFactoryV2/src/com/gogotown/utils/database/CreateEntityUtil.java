@@ -29,7 +29,6 @@ public class CreateEntityUtil {
 	 * 连接数据库，查询表字段、类型、写到指定目录
 	 * @throws Exception 
 	 */
-	@SuppressWarnings("static-access")
 	private static TableEntity entityGenerate(String tablename,DbEntity dbEntity,FileEntity fileEntity) throws Exception{
     	//创建连接
     	Connection conn = null;
@@ -82,6 +81,7 @@ public class CreateEntityUtil {
 				if(colSizes[i] >= 11 && "Integer".equalsIgnoreCase(filedTypes[i])){
 					colTypes[i] = "bigint";
 				}
+				filedTypes[i] = sqlType2JavaType(colTypes[i]);
 			}
 			table.setColSizes(colSizes);
 			table.setF_math(f_math);
@@ -93,15 +93,18 @@ public class CreateEntityUtil {
 			table.setColTypes(colTypes);
 			table.setFieldNames(fieldNames);
 			table.setFiledTypes(filedTypes);
-			table.setTablename(initcap(tablename));
+			table.setTablename(tablename);
+			table.setEntityName(initcap(tablename));
+			table.setTable_filelds(table_filelds);
 			//主键
 			String primary_colmun = columnComments.get(Constans.PRIMARY_COLUMN_TAB);
+			primary_colmun = first2little(initcap(primary_colmun));
 			table.setPrimary_colmun(primary_colmun);
 			String projectPath = fileEntity.getProjectPath();
 				projectPath = projectPath + ((projectPath.endsWith("/") || projectPath.endsWith("\\")) ? "java" : "/java");
 				String document = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_MODEL);
 				String entityName = initcap(tablename);
-				PojoEntity pojoEntity = new PojoEntity(fileEntity.getBasePackage(), tablename, entityName, table_description, fileEntity.getAuthorName(), fieldNames, remaks, table_filelds, filedTypes,primary_colmun);
+				PojoEntity pojoEntity = new PojoEntity(fileEntity.getBasePackage(), fileEntity.getAuthorName(),table);
 				Map<String, Object> datamap = ObjectMapUtil.obj2Map(pojoEntity);
 				FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_ENTITY, document, entityName + ".java", datamap, fileEntity.isIs_cover());
 		} catch (SQLException e) {
