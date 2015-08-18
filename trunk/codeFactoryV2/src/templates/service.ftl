@@ -4,33 +4,33 @@ import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
 import ${base_packge}.commons.ResultData;
-import ${base_packge}.${type_dao}.${entityDomain?cap_first}Dao;
-import ${base_packge}.${type_model}.${entityDomain?cap_first};
+import ${base_packge}.${type_dao}.${table.entityName?cap_first}Dao;
+import ${base_packge}.${type_model}.${table.entityName?cap_first};
 import ${base_packge}.util.log.util.CustomerLogUtil;
 
  /**   
-* @Title: ${entityDomain?cap_first}Service.java 
+* @Title: ${table.entityName?cap_first}Service.java 
 * @Package ${base_packge}.${type_service}
-* @Description: ${table_description}
+* @Description: ${table.table_description}
 * @author ${author}
 * @date ${current_now}
 * @version V1.0   
 * create by codeFactory
 */
-public class ${entityDomain?cap_first}Service {
-	private static Logger logger = Logger.getLogger(${entityDomain?cap_first}Service.class);
+public class ${table.entityName?cap_first}Service {
+	private static Logger logger = Logger.getLogger(${table.entityName?cap_first}Service.class);
 	/** 
-	* @author hezhoujun
+	* @author ${author}
 	* @Title: save 
 	* @Description: 保存
 	* @param t
 	* @return
-	* @throws Exception ${entityDomain?cap_first}
+	* @throws Exception 
 	*/
-	public static ${entityDomain?cap_first} save(${entityDomain?cap_first} t) throws Exception{
-		${entityDomain?cap_first} a = null;
+	public static ${table.entityName?cap_first} save(${table.entityName?cap_first} t) throws Exception{
+		${table.entityName?cap_first} a = null;
 		try {
-			a = ${entityDomain?cap_first}Dao.save(t);
+			a = ${table.entityName?cap_first}Dao.save(t);
 		} catch (Exception e) {
 			CustomerLogUtil.hezhoujunLog(logger, "保存出错，error："+e.getMessage(), e.fillInStackTrace());
 			throw e;
@@ -39,7 +39,7 @@ public class ${entityDomain?cap_first}Service {
 	}
 	
 	/** 
-	* @author hezhoujun
+	* @author ${author}
 	* @Title: list 
 	* @Description: 分页查询
 	* @param maps
@@ -49,12 +49,12 @@ public class ${entityDomain?cap_first}Service {
 	public static ResultData list(Map<String, Object> maps) throws Exception{
 		ResultData data = new ResultData();
 		try {
-			int count = ${entityDomain?cap_first}Dao.qryListObjectCount(${entityDomain?cap_first}.class, maps);
+			int count = ${table.entityName?cap_first}Dao.qryListObjectCount(${table.entityName?cap_first}.class, maps);
 			int currentpage = (int) maps.get("current");
 			int pagesize =(int) maps.get("pageSize");
 			int pages = count%pagesize == 0 ? count / pagesize : count/pagesize +1;
 			maps.put("pages", pages);
-			 List<${entityDomain?cap_first}> list= ${entityDomain?cap_first}Dao.qryListObject(${entityDomain?cap_first}.class, maps, currentpage, pagesize);
+			 List<${table.entityName?cap_first}> list= ${table.entityName?cap_first}Dao.qryListObject(${table.entityName?cap_first}.class, maps, currentpage, pagesize);
 			data.setPageSize(pagesize);
 			data.setTotal(count);
 			data.setData(list);
@@ -68,17 +68,17 @@ public class ${entityDomain?cap_first}Service {
 	}
 	
 	/** 
-	* @author hezhoujun
+	* @author ${author}
 	* @Title: getList 
 	* @Description: 获取列表
 	* @param maps
 	* @return
-	* @throws Exception List<${entityDomain?cap_first}>
+	* @throws Exception List<${table.entityName?cap_first}>
 	*/
-	public static List<${entityDomain?cap_first}> getList(Map<String, Object> maps) throws Exception{
-		List<${entityDomain?cap_first}> list = null;
+	public static List<${table.entityName?cap_first}> getList(Map<String, Object> maps) throws Exception{
+		List<${table.entityName?cap_first}> list = null;
 		try {
-			list = ${entityDomain?cap_first}Dao.qryList(${entityDomain?cap_first}.class, maps);
+			list = ${table.entityName?cap_first}Dao.qryList(${table.entityName?cap_first}.class, maps);
 		} catch (Exception e) {
 			CustomerLogUtil.hezhoujunLog(logger, "查询列表出错，error："+e.getMessage(), e.fillInStackTrace());
 			throw e;
@@ -87,17 +87,17 @@ public class ${entityDomain?cap_first}Service {
 	}
 	
 	/** 
-	* @author hezhoujun
+	* @author ${author}
 	* @Title: getById 
 	* @Description: 根据id查询
 	* @param id
 	* @return
-	* @throws Exception ${entityDomain?cap_first}
+	* @throws Exception ${table.entityName?cap_first}
 	*/
-	public static ${entityDomain?cap_first} getById(Long id) throws Exception{
-		${entityDomain?cap_first} t = null;
+	public static ${table.entityName?cap_first} getById(Long ${table.primary_colmun?uncap_first}) throws Exception{
+		${table.entityName?cap_first} t = null;
 		try {
-			t = ${entityDomain?cap_first}Dao.getById(${entityDomain?cap_first}.class, id);
+			t = ${table.entityName?cap_first}Dao.getById(${table.entityName?cap_first}.class, ${table.primary_colmun?uncap_first});
 		} catch (Exception e) {
 			CustomerLogUtil.hezhoujunLog(logger, "根据id查询出错，error："+e.getMessage(), e.fillInStackTrace());
 			throw e;
@@ -106,25 +106,25 @@ public class ${entityDomain?cap_first}Service {
 	}
 	
 	/** 
-	* @author hezhoujun
+	* @author ${author}
 	* @Title: delete 
 	* @Description: 根据id删除
 	* @param id
 	* @return
 	* @throws Exception int
 	*/
-	public static int delete(Long id) throws Exception{
-		return ${entityDomain?cap_first}Dao.delete(${entityDomain?cap_first}.class, id);
+	public static int delete(Long ${table.primary_colmun?uncap_first}) throws Exception{
+		return ${table.entityName?cap_first}Dao.delete(${table.entityName?cap_first}.class, ${table.primary_colmun?uncap_first});
 	}
 	
 	/** 
-	* @author hezhoujun
+	* @author ${author}
 	* @Title: update 
 	* @Description: 修改
 	* @param t
 	* @throws Exception void
 	*/
-	public static void update(${entityDomain?cap_first} t) throws Exception{
-		${entityDomain?cap_first}Dao.update(t);
+	public static void update(${table.entityName?cap_first} t) throws Exception{
+		${table.entityName?cap_first}Dao.update(t);
 	}
 	}

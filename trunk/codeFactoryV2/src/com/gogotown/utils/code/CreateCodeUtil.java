@@ -32,14 +32,11 @@ public class CreateCodeUtil {
 	public static void createCode(TableEntity table,FileEntity fileEntity){
 		try {
 			String entityName = table.getEntityName();
-			String tableDesc = table.getTable_description();
 			if(null != fileEntity){
-				//adminAction
-				String littleEntityName = GoGoStringUtil.firstChar2Little(entityName);
 				//AdminAction
 				String bigEntityName = GoGoStringUtil.firstChar2Up(entityName);
 				//封装datamap实体类
-				CodeEntity codeEntity = new CodeEntity(tableDesc, fileEntity.getBasePackage(), littleEntityName,fileEntity.getAuthorName());
+				CodeEntity codeEntity = new CodeEntity(table, fileEntity.getBasePackage(),fileEntity.getAuthorName());
 				Map<String, Object> datamap = ObjectMapUtil.obj2Map(codeEntity);
 				String projectPath = fileEntity.getProjectPath();
 				projectPath = projectPath + ((projectPath.endsWith("/") || projectPath.endsWith("\\")) ? "java" : "/java");
@@ -51,7 +48,6 @@ public class CreateCodeUtil {
 				FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_SERVICE,document_service,bigEntityName+"Service.java",datamap,fileEntity.isIs_cover());
 				//Action
 				String document_Action = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_ACTION);
-				datamap.put("primary_colmun", GoGoStringUtil.firstChar2Up(table.getPrimary_colmun()));
 				FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_ACTION,document_Action,bigEntityName+"Action.java",datamap,fileEntity.isIs_cover());
 			}
 		} catch (IOException e) {

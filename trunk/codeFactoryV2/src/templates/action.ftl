@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import ${base_packge}.commons.ResultData;
 import ${base_packge}.constant.SysConstants;
-import ${base_packge}.${type_model}.${entityDomain?cap_first};
-import ${base_packge}.${type_service}.${entityDomain?cap_first}Service;
+import ${base_packge}.${type_model}.${table.entityName?cap_first};
+import ${base_packge}.${type_service}.${table.entityName?cap_first}Service;
 import ${base_packge}.util.ObjectMapUtil;
 import ${base_packge}.util.ReflectionModelUtil;
 import ${base_packge}.util.StringUtils;
@@ -19,20 +19,20 @@ import ${base_packge}.util.json.JsonUtil;
 import ${base_packge}.util.log.util.CustomerLogUtil;
 
 /**   
-* @Title: ${entityDomain?cap_first}Action.java 
+* @Title: ${table.entityName?cap_first}Action.java 
 * @Package ${base_packge}.${type_action}
-* @Description: ${table_description}
+* @Description: ${table.table_description}
 * @author ${author}
 * @date ${current_now}
 * @version V1.0   
 * create by codeFactory
 */
-public class ${entityDomain?cap_first}Action extends HttpServlet{
-	Logger logger = Logger.getLogger(${entityDomain?cap_first}Action.class);
+public class ${table.entityName?cap_first}Action extends HttpServlet{
+	Logger logger = Logger.getLogger(${table.entityName?cap_first}Action.class);
 	
 	 /**@Fields serialVersionUID : TODO*/ 
 	private static final long serialVersionUID = 1L;
-	String actionFilePath = "${entityDomain}";
+	String actionFilePath = "${table.entityName?uncap_first}";
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -59,9 +59,9 @@ public class ${entityDomain?cap_first}Action extends HttpServlet{
 	*/
 	void list(HttpServletRequest req,HttpServletResponse resp) throws IOException{
 		try {
-			${entityDomain?cap_first} ${entityDomain} = ReflectionModelUtil.getObjectModelRequest(${entityDomain?cap_first}.class, req);
-			Map<String, Object> maps = ObjectMapUtil.obj2Map(${entityDomain});
-			ResultData data = ${entityDomain?cap_first}Service.list(maps);
+			${table.entityName?cap_first} ${table.entityName?uncap_first} = ReflectionModelUtil.getObjectModelRequest(${table.entityName?cap_first}.class, req);
+			Map<String, Object> maps = ObjectMapUtil.obj2Map(${table.entityName?uncap_first});
+			ResultData data = ${table.entityName?cap_first}Service.list(maps);
 			req.setAttribute("resultData", data);
 			//获取处理结果信息
 			//save/update/delete
@@ -86,8 +86,8 @@ public class ${entityDomain?cap_first}Action extends HttpServlet{
 		try {
 			String id = req.getParameter("id");
 			if(StringUtils.isNotBlank(id) && StringUtils.isNumber(id)){
-				${entityDomain?cap_first} ${entityDomain} = ${entityDomain?cap_first}Service.getById(Long.parseLong(id));
-				req.setAttribute("${entityDomain}", ${entityDomain});
+				${table.entityName?cap_first} ${table.entityName?uncap_first} = ${table.entityName?cap_first}Service.getById(Long.parseLong(id));
+				req.setAttribute("${table.entityName?uncap_first}", ${table.entityName?uncap_first});
 			}
 			req.getRequestDispatcher(SysConstants.PAGE_BASE_PATH+actionFilePath+"/edit.jsp").forward(req, resp);
 		} catch (Exception e) {
@@ -107,14 +107,14 @@ public class ${entityDomain?cap_first}Action extends HttpServlet{
 		int code = 0;
 		String result = null;
 		try {
-			${entityDomain?cap_first} ${entityDomain} = ReflectionModelUtil.getObjectModelRequest(${entityDomain?cap_first}.class, req);
-			<#if primary_colmun?exists>
+			${table.entityName?cap_first} ${table.entityName?uncap_first} = ReflectionModelUtil.getObjectModelRequest(${table.entityName?cap_first}.class, req);
+			<#if table.primary_colmun?exists>
 			//修改
-			if(null != ${entityDomain}.get${primary_colmun}() && ${entityDomain}.get${primary_colmun}() > 0){
-				${entityDomain?cap_first}Service.update(${entityDomain});
+			if(null != ${table.entityName?uncap_first}.get${table.primary_colmun?cap_first}() && ${table.entityName?uncap_first}.get${table.primary_colmun?cap_first}() > 0){
+				${table.entityName?cap_first}Service.update(${table.entityName?uncap_first});
 			}else{
 			//保存
-				${entityDomain} = ${entityDomain?cap_first}Service.save(${entityDomain});
+				${table.entityName?uncap_first} = ${table.entityName?cap_first}Service.save(${table.entityName?uncap_first});
 			}
 			</#if>
 			code = 1;
@@ -141,7 +141,7 @@ public class ${entityDomain?cap_first}Action extends HttpServlet{
 		int code = 0;
 		if(StringUtils.isNotBlank(id) && StringUtils.isNumber(id)){
 			try {
-				int n = ${entityDomain?cap_first}Service.delete(Long.parseLong(id));
+				int n = ${table.entityName?cap_first}Service.delete(Long.parseLong(id));
 				code = n > 0 ? 1 : 0;
 				result = JsonUtil.returnJsonInfo(code, "");
 			}  catch (Exception e) {
