@@ -106,7 +106,7 @@ public class CreateEntityUtil {
 				String entityName = initcap(tablename);
 				PojoEntity pojoEntity = new PojoEntity(fileEntity.getBasePackage(), fileEntity.getAuthorName(),table);
 				Map<String, Object> datamap = ObjectMapUtil.obj2Map(pojoEntity);
-				FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_ENTITY, document, entityName + ".java", datamap, fileEntity.isIs_cover());
+				FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_ENTITY, document, entityName + ".java", datamap,fileEntity);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally{

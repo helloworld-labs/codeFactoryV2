@@ -4,8 +4,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
+
+import com.gogotown.entity.FileEntity;
 
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
@@ -25,27 +26,30 @@ public class FreemarkerUtil {
 	* @param isCover 是否覆盖 true 覆盖 false 不覆盖
 	 * @throws IOException 
 	*/
-	public static void analysisTemplate(String templateName,String distinctPath,String distinctName,Map<?,?> datamap,boolean isCover) throws IOException{
+	public static void analysisTemplate(String templateName,String distinctPath,String distinctName,Map<?,?> datamap,FileEntity fileEntity) throws IOException{
 		BufferedWriter bw = null;
 		//生成文件保存的位置(完整路径:example:e:/xx/xx/xxActino.java)
-		File distinctFile = getDistinctFile(distinctPath, distinctName,isCover);
+		File distinctFile = getDistinctFile(distinctPath, distinctName,fileEntity.isIs_cover());
 		if(distinctFile == null){
 			System.err.println("文件:"+distinctPath+distinctName+" 已经存在！");
 		}else{
 			try {
 				Configuration config=new Configuration();
-//				String path = FreemarkerUtil.class.getResource("/").toString();
-				config.setClassForTemplateLoading(FreemarkerUtil.class, "/templates");
-//				path = path.replaceAll("file:/", "");
-//				File file=new File(path);
-				//设置要解析的模板所在的目录，并加载模板文件
-//				config.setDirectoryForTemplateLoading(file);
+				if(fileEntity.getTempateReadType() == 2){
+					//通过引用项目template路径下读取start
+					File file=new File(fileEntity.getTemplatePath());
+					//设置要解析的模板所在的目录，并加载模板文件
+					config.setDirectoryForTemplateLoading(file);
+					//通过引用项目template路径下读取end
+				}else{
+					//通过生成器路径读取start
+					config.setClassForTemplateLoading(FreemarkerUtil.class, "/templates");
+					//通过生成器路径读取end
+				}
 				//设置包装器，并将对象包装为数据模型
 				config.setObjectWrapper(new DefaultObjectWrapper());
-				
 				//获取模板,并设置编码方式，这个编码必须要与页面中的编码格式一致
 				Template template=config.getTemplate(templateName,"utf-8");
-				
 				//合并数据模型与模板
 				//StringWriter stringWriter = new StringWriter(); 
 				//输出到控制台
@@ -90,17 +94,5 @@ public class FreemarkerUtil {
 			return null;
 		}
 		return file;
-	}
-	
-	public static void main(String[] args) {
-		try {
-			Map<String, Object> datamap = new HashMap<String, Object>();
-			datamap.put("action_package", "xx.xx.xx");
-			datamap.put("entity_package", "xa.aa.aa");
-			datamap.put("entityDomain", "testAction");
-			analysisTemplate("action.ftl","e:/test/hzj/abc/def","pageAction.java",datamap,false);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

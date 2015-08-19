@@ -18,6 +18,15 @@ public class FileEntity {
 	* @Fields flag : 是否覆盖已经生成的代码
 	*/ 
 	private boolean is_cover = false;
+	
+	 /**@Fields tempateReadType : 模版读取方式 
+	  * 1 从生成器项目下的template读取 2从引用项目指定路径下读取，
+	  * 默认读取生成器下的template下的模版
+	  * */ 
+	private int tempateReadType = 1;
+	
+	 /**@Fields templatePath : 模版加载路径 tempateReadType值为2的时候传入有效*/ 
+	private String templatePath = "src/templates";
 
 	public FileEntity(String projectPath, String packagePath,
 			String authorName, boolean is_cover) {
@@ -59,4 +68,21 @@ public class FileEntity {
 	public void setIs_cover(boolean is_cover) {
 		this.is_cover = is_cover;
 	}
+
+	public int getTempateReadType() {
+		return tempateReadType;
+	}
+
+	public void setTempateReadType(int tempateReadType) {
+		this.tempateReadType = tempateReadType;
+	}
+
+	public String getTemplatePath() {
+		return templatePath;
+	}
+
+	public void setTemplatePath(String templatePath) {
+		this.templatePath = templatePath;
+	}
+	
 }

@@ -29,14 +29,14 @@ public class CreatePateUtil {
 	public static void createPage(TableEntity table,FileEntity fileEntity,FlagEntity flagEntity) throws IOException{
 		PageEntity pageEntity = new PageEntity(table);
 		Map<String, Object> datamap = ObjectMapUtil.obj2Map(pageEntity);
-		String folder_name = GoGoStringUtil.firstChar2Little(table.getTablename());
+		String folder_name = GoGoStringUtil.firstChar2Little(table.getEntityName());
 		if(flagEntity.isCreatePage()){
 			//edit.jsp
 			String document_edit = GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), Constans.WEB_JSP_PATH,folder_name);
-			FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_EDIT,document_edit,"edit.jsp",datamap,fileEntity.isIs_cover());
+			FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_EDIT,document_edit,"edit.jsp",datamap,fileEntity);
 			//list.jsp
 			String document_list = GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), Constans.WEB_JSP_PATH,folder_name);
-			FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_LIST,document_list,"list.jsp",datamap,fileEntity.isIs_cover());
+			FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_LIST,document_list,"list.jsp",datamap,fileEntity);
 		}
 	}
 	
