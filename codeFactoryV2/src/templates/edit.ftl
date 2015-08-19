@@ -15,7 +15,7 @@
 <div class="row">
 <div class="col-md-10">
 <a href="javascript:history.go(-1);" role="button" class="btn btn-success">&lt;&lt;返回</a>
-<button type="button" class="btn btn-success"  onclick="saveObj('${r"$"}{mAdmin == null ?'save':'update'}')">保存</button> 
+<button type="button" class="btn btn-success"  onclick="saveObj('${r"$"}{${table.entityName?uncap_first} == null ?'save':'update'}')">保存</button> 
 </div>
 </div>
   <form data="editForm" class="form-horizontal" id="saveObjForm">
