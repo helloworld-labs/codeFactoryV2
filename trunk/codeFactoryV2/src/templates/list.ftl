@@ -20,7 +20,7 @@
 </div>
 </div>
 </form>
-<table class="table table-bordered text-center mgt10">
+<table class="table table-striped table-bordered text-center mgt10">
 <thead>
         <tr>
 		<#list table.fieldNames as i>
