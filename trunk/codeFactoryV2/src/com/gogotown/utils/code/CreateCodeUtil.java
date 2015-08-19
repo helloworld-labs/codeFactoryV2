@@ -44,17 +44,17 @@ public class CreateCodeUtil {
 				if(flagEntity.isCreateDao()){
 					//Dao
 					String document_dao = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_DAO);
-					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_DAO,document_dao,bigEntityName+"Dao.java",datamap,fileEntity.isIs_cover());
+					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_DAO,document_dao,bigEntityName+"Dao.java",datamap,fileEntity);
 				}
 				if(flagEntity.isCreateService()){
 					//Service
 					String document_service = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_SERVICE);
-					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_SERVICE,document_service,bigEntityName+"Service.java",datamap,fileEntity.isIs_cover());
+					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_SERVICE,document_service,bigEntityName+"Service.java",datamap,fileEntity);
 				}
 				if(flagEntity.isCreateAction()){
 					//Action
 					String document_Action = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_ACTION);
-					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_ACTION,document_Action,bigEntityName+"Action.java",datamap,fileEntity.isIs_cover());
+					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_ACTION,document_Action,bigEntityName+"Action.java",datamap,fileEntity);
 				}
 			}
 		} catch (IOException e) {
