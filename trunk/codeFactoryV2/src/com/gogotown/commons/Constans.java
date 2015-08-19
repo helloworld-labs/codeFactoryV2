@@ -40,6 +40,7 @@ public interface Constans {
 	String TEMPLATE_LIST  = "list.ftl";
 	String TEMPLATE_EDIT = "edit.ftl";
 	String TEMPLATE_ENTITY = "entity.ftl";
+	String TEMPLATE_PROPERTIE = "propertie.ftl";
 	
 	String WEB_XML_PATH = "webapp.WEB-INF";
 	String WEB_JSP_PATH = "webapp.WEB-INF.views";

@@ -46,6 +46,11 @@ public class CreateCodeUtil {
 					String document_dao = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_DAO);
 					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_DAO,document_dao,bigEntityName+"Dao.java",datamap,fileEntity);
 				}
+				if(flagEntity.isCreatePropertie()){
+					//XxDao.properties
+					String document_dao = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_DAO);
+					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_PROPERTIE,document_dao,bigEntityName+"Dao.properties",datamap,fileEntity);
+				}
 				if(flagEntity.isCreateService()){
 					//Service
 					String document_service = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_SERVICE);

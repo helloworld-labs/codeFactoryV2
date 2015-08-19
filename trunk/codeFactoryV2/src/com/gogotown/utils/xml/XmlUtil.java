@@ -1,5 +1,6 @@
 package com.gogotown.utils.xml;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -80,14 +81,19 @@ public class XmlUtil {
 	public static void createWebXml(FileEntity fileEntity,String servletName,String fullClassPath,String urlPattern,FlagEntity flagEntity) throws Exception{
 		if(fileEntity != null && flagEntity.isCreateWebXml()){
 			String xmlPath =  GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), Constans.WEB_XML_PATH, "web.xml");
-			if(xmlPath.endsWith("/"))  xmlPath = xmlPath.substring(0, xmlPath.length()-1);
-			Document document = readXml(xmlPath, servletName, fullClassPath, urlPattern);
-			if(document != null){
-				writeXml(document, xmlPath);
-				System.out.println("生成web.xml "+xmlPath+" 成功");
+			File xmlFile = new File(xmlPath);
+			if(xmlFile.exists()){
+				if(xmlPath.endsWith("/"))  xmlPath = xmlPath.substring(0, xmlPath.length()-1);
+				Document document = readXml(xmlPath, servletName, fullClassPath, urlPattern);
+				if(document != null){
+					writeXml(document, xmlPath);
+					System.out.println("生成web.xml "+xmlPath+" 成功");
+				}else{
+					System.err.println("对应["+servletName+"]的值，已经在"+xmlPath+" 中配置了..");
+				}
 			}else{
-				System.err.println("对应["+servletName+"]的值，已经在"+xmlPath+" 中配置了..");
-			}	
+				System.err.println("web.xml不存在");
+			}
 		}
 	}
 	
