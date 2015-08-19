@@ -12,6 +12,7 @@ import org.dom4j.io.XMLWriter;
 
 import com.gogotown.commons.Constans;
 import com.gogotown.entity.FileEntity;
+import com.gogotown.entity.FlagEntity;
 import com.gogotown.utils.GoGoStringUtil;
 
 public class XmlUtil {
@@ -76,8 +77,8 @@ public class XmlUtil {
 	* @param urlPattern
 	* @throws Exception void
 	*/
-	public static void createWebXml(FileEntity fileEntity,String servletName,String fullClassPath,String urlPattern) throws Exception{
-		if(fileEntity != null){
+	public static void createWebXml(FileEntity fileEntity,String servletName,String fullClassPath,String urlPattern,FlagEntity flagEntity) throws Exception{
+		if(fileEntity != null && flagEntity.isCreateWebXml()){
 			String xmlPath =  GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), Constans.WEB_XML_PATH, "web.xml");
 			if(xmlPath.endsWith("/"))  xmlPath = xmlPath.substring(0, xmlPath.length()-1);
 			Document document = readXml(xmlPath, servletName, fullClassPath, urlPattern);
@@ -93,7 +94,7 @@ public class XmlUtil {
 	public static void main(String[] args) {
 		try {
 			FileEntity fileEntity = new FileEntity("E:/test/hz/abc/def", "src/main/webapp/WEB-INF", "hezhoujun", true);
-			createWebXml(fileEntity, "AdminAction", "com.manage.action.AdminAction", "admin");
+			createWebXml(fileEntity, "AdminAction", "com.manage.action.AdminAction", "admin",new FlagEntity());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

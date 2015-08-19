@@ -3,6 +3,7 @@ package com.gogotown.service;
 import com.gogotown.commons.Constans;
 import com.gogotown.entity.DbEntity;
 import com.gogotown.entity.FileEntity;
+import com.gogotown.entity.FlagEntity;
 import com.gogotown.entity.TableEntity;
 import com.gogotown.utils.GoGoStringUtil;
 import com.gogotown.utils.code.CreateCodeUtil;
@@ -21,18 +22,18 @@ public class CodeFactoryService {
 	* @param fileEntity
 	* @throws Exception void
 	*/
-	public static void codeGenerateRun(String tablename,DbEntity dbEntity,FileEntity fileEntity)throws Exception{
+	public static void codeGenerateRun(String tablename,DbEntity dbEntity,FileEntity fileEntity,FlagEntity flagEntity)throws Exception{
 		//bean
 		TableEntity table = CreateEntityUtil.generateEntityRun(tablename, dbEntity, fileEntity);
 		//code
-		CreateCodeUtil.createCode(table, fileEntity);
+		CreateCodeUtil.createCode(table, fileEntity,flagEntity);
 		//page
-		CreatePateUtil.createPage(table, fileEntity);
+		CreatePateUtil.createPage(table, fileEntity,flagEntity);
 		String entityName = GoGoStringUtil.firstChar2Up(table.getEntityName());
 		String urlPattern = GoGoStringUtil.firstChar2Little(table.getEntityName());
 		String fullClassPath = fileEntity.getBasePackage()+ "." +Constans.TYPE_ACTION+"."+ entityName +"Action";
 		//web.xml
-		XmlUtil.createWebXml(fileEntity, entityName, fullClassPath, urlPattern);
+		XmlUtil.createWebXml(fileEntity, entityName, fullClassPath, urlPattern,flagEntity);
 	}
 	
 	public static void main(String[] args){
@@ -42,10 +43,10 @@ public class CodeFactoryService {
 			String projectPath = (realPath + "src/main/").replaceAll("file:/", "");
 		 * */
 		try {
-			DbEntity dbEntity = new DbEntity("com.mysql.jdbc.Driver", "jdbc:mysql://192.168.2.103:3306/lisendb", "root", "root");
+			DbEntity dbEntity = new DbEntity("com.mysql.jdbc.Driver", "jdbc:mysql://192.168.0.155:3306/lisendb", "root", "root");
 			String tablename = "admin";
 			FileEntity fileEntity = new FileEntity("E:/testpage/","com.lisen.entity","hezhoujun",true);
-			codeGenerateRun(tablename, dbEntity, fileEntity);
+			codeGenerateRun(tablename, dbEntity, fileEntity,new FlagEntity());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
