@@ -13,9 +13,9 @@
 <body>
 <div class="pd30">
 <div class="row">
-<div class="col-md-10"><h3>${r"${"}${table.entityName?uncap_first} == null ?'新增':'修改'}${table.table_description}信息</h3></div>
-<div class="col-md-2">
+<div class="col-md-10">
 <a href="javascript:history.go(-1);" role="button" class="btn btn-success">&lt;&lt;返回</a>
+<button type="button" class="btn btn-success"  onclick="saveObj('${r"$"}{mAdmin == null ?'save':'update'}')">保存</button> 
 </div>
 </div>
   <form data="editForm" class="form-horizontal" id="saveObjForm">
@@ -41,13 +41,6 @@
         </tr>
       </#if>
 	</#list>
-        <tr>
-            <td></td>
-            <td>
-            <button type="button" class="btn btn-success"  onclick="saveObj('${r"${"}${table.entityName?uncap_first} == null ?'save':'update'}')">保存</button> 
-   			<button type="reset" class="btn btn-danger" >取消</button>
-			</td>
-        </tr>
     </table>
    </form>
 </div>
