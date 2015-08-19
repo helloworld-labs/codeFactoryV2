@@ -9,11 +9,18 @@ package com.gogotown.entity;
 * @version V1.0   
 */
 public class FlagEntity {
+	 /**@Fields isCreateDao : 是否生成dao*/ 
 	private boolean isCreateDao = true;
+	 /**@Fields isCreateService : 是否生成service*/ 
 	private boolean isCreateService = true;
+	 /**@Fields isCreateAction : 是否创建action*/ 
 	private boolean isCreateAction = true;
+	 /**@Fields isCreateWebXml : 是否创建web.xml*/ 
 	private boolean isCreateWebXml = true;
+	 /**@Fields isCreatePage : 是否创建jsp页面*/ 
 	private boolean isCreatePage = true;
+	 /**@Fields isCreatePropertie : 是否生成xxDao.properties 默认不生成*/ 
+	private boolean isCreatePropertie = false;
 	
 	public boolean isCreateDao() {
 		return isCreateDao;
@@ -44,6 +51,12 @@ public class FlagEntity {
 	}
 	public void setCreatePage(boolean isCreatePage) {
 		this.isCreatePage = isCreatePage;
+	}
+	public boolean isCreatePropertie() {
+		return isCreatePropertie;
+	}
+	public void setCreatePropertie(boolean isCreatePropertie) {
+		this.isCreatePropertie = isCreatePropertie;
 	}
 	
 }
