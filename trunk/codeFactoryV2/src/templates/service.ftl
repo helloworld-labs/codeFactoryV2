@@ -50,10 +50,13 @@ public class ${table.entityName?cap_first}Service {
 		ResultData data = new ResultData();
 		try {
 			int count = ${table.entityName?cap_first}Dao.qryListObjectCount(${table.entityName?cap_first}.class, maps);
-			int currentpage = (int) maps.get("current");
+			int offset =Pager.getOffest();
 			int pagesize =(int) maps.get("pageSize");
+			int current = offset / pagesize +1;
 			int pages = count%pagesize == 0 ? count / pagesize : count/pagesize +1;
+			maps.put("currentPage", Pager.getOffest());
 			maps.put("pages", pages);
+			maps.put("current", current);
 			 List<${table.entityName?cap_first}> list= ${table.entityName?cap_first}Dao.qryListObject(${table.entityName?cap_first}.class, maps, currentpage, pagesize);
 			data.setPageSize(pagesize);
 			data.setTotal(count);
