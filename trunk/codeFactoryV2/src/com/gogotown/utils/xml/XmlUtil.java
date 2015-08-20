@@ -14,6 +14,7 @@ import org.dom4j.io.XMLWriter;
 import com.gogotown.commons.Constans;
 import com.gogotown.entity.FileEntity;
 import com.gogotown.entity.FlagEntity;
+import com.gogotown.entity.TableEntity;
 import com.gogotown.utils.GoGoStringUtil;
 
 public class XmlUtil {
@@ -78,8 +79,11 @@ public class XmlUtil {
 	* @param urlPattern
 	* @throws Exception void
 	*/
-	public static void createWebXml(FileEntity fileEntity,String servletName,String fullClassPath,String urlPattern,FlagEntity flagEntity) throws Exception{
+	public static void createWebXml(TableEntity table,FileEntity fileEntity,FlagEntity flagEntity) throws Exception{
 		if(fileEntity != null && flagEntity.isCreateWebXml()){
+			String servletName = GoGoStringUtil.firstChar2Up(table.getEntityName());
+			String urlPattern = GoGoStringUtil.firstChar2Little(table.getEntityName());
+			String fullClassPath = fileEntity.getBasePackage()+ "." +Constans.TYPE_ACTION+"."+ servletName +"Action";
 			String xmlPath =  GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), Constans.WEB_XML_PATH, "web.xml");
 			File xmlFile = new File(xmlPath);
 			if(xmlFile.exists()){
@@ -94,15 +98,6 @@ public class XmlUtil {
 			}else{
 				System.err.println("web.xml不存在");
 			}
-		}
-	}
-	
-	public static void main(String[] args) {
-		try {
-			FileEntity fileEntity = new FileEntity("E:/test/hz/abc/def", "src/main/webapp/WEB-INF", "hezhoujun", true);
-			createWebXml(fileEntity, "AdminAction", "com.manage.action.AdminAction", "admin",new FlagEntity());
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	

@@ -1,11 +1,9 @@
 package com.gogotown.service;
 
-import com.gogotown.commons.Constans;
 import com.gogotown.entity.DbEntity;
 import com.gogotown.entity.FileEntity;
 import com.gogotown.entity.FlagEntity;
 import com.gogotown.entity.TableEntity;
-import com.gogotown.utils.GoGoStringUtil;
 import com.gogotown.utils.code.CreateCodeUtil;
 import com.gogotown.utils.database.CreateEntityUtil;
 import com.gogotown.utils.page.CreatePateUtil;
@@ -29,11 +27,8 @@ public class CodeFactoryService {
 		CreateCodeUtil.createCode(table, fileEntity,flagEntity);
 		//page
 		CreatePateUtil.createPage(table, fileEntity,flagEntity);
-		String entityName = GoGoStringUtil.firstChar2Up(table.getEntityName());
-		String urlPattern = GoGoStringUtil.firstChar2Little(table.getEntityName());
-		String fullClassPath = fileEntity.getBasePackage()+ "." +Constans.TYPE_ACTION+"."+ entityName +"Action";
 		//web.xml
-		XmlUtil.createWebXml(fileEntity, entityName, fullClassPath, urlPattern,flagEntity);
+		XmlUtil.createWebXml(table,fileEntity,flagEntity);
 	}
 	
 	public static void main(String[] args){
