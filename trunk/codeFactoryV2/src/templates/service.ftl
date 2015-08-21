@@ -7,6 +7,7 @@ import ${base_packge}.commons.ResultData;
 import ${base_packge}.${type_dao}.${table.entityName?cap_first}Dao;
 import ${base_packge}.${type_model}.${table.entityName?cap_first};
 import ${base_packge}.util.log.util.CustomerLogUtil;
+import ${base_packge}.commons.Pager;
 
  /**   
 * @Title: ${table.entityName?cap_first}Service.java 
@@ -57,7 +58,7 @@ public class ${table.entityName?cap_first}Service {
 			maps.put("currentPage", Pager.getOffest());
 			maps.put("pages", pages);
 			maps.put("current", current);
-			 List<${table.entityName?cap_first}> list= ${table.entityName?cap_first}Dao.qryListObject(${table.entityName?cap_first}.class, maps, currentpage, pagesize);
+			 List<${table.entityName?cap_first}> list= ${table.entityName?cap_first}Dao.qryListObject(${table.entityName?cap_first}.class, maps, offset, pagesize);
 			data.setPageSize(pagesize);
 			data.setTotal(count);
 			data.setData(list);
