@@ -1,10 +1,8 @@
 package ${base_packge}.${type_action};
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Map;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -134,7 +132,6 @@ public class ${table.entityName?cap_first}Action extends BaseAction{
 	* @param response void
 	*/
 	void delete(HttpServletRequest req,HttpServletResponse resp) throws IOException, ServletException{
-		PrintWriter out = resp.getWriter();
 		String id = req.getParameter("id");
 		String result = null;
 		int code = 0;
