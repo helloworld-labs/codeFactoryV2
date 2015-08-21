@@ -27,7 +27,7 @@ import ${base_packge}.util.log.util.CustomerLogUtil;
 * @version V1.0   
 * create by codeFactory
 */
-public class ${table.entityName?cap_first}Action extends HttpServlet{
+public class ${table.entityName?cap_first}Action extends BaseAction{
 	Logger logger = Logger.getLogger(${table.entityName?cap_first}Action.class);
 	
 	 /**@Fields serialVersionUID : TODO*/ 
@@ -57,7 +57,7 @@ public class ${table.entityName?cap_first}Action extends HttpServlet{
 	* @param req
 	* @param resp void
 	*/
-	void list(HttpServletRequest req,HttpServletResponse resp) throws IOException{
+	void list(HttpServletRequest req,HttpServletResponse resp) throws IOException, ServletException{
 		try {
 			${table.entityName?cap_first} ${table.entityName?uncap_first} = ReflectionModelUtil.getObjectModelRequest(${table.entityName?cap_first}.class, req);
 			Map<String, Object> maps = ObjectMapUtil.obj2Map(${table.entityName?uncap_first});
@@ -71,7 +71,7 @@ public class ${table.entityName?cap_first}Action extends HttpServlet{
 			req.getRequestDispatcher(SysConstants.PAGE_BASE_PATH+actionFilePath+"/list.jsp").forward(req, resp);
 		} catch (Exception e) {
 			CustomerLogUtil.${author}Log(logger, "查询列表出错，error："+e.getMessage(), e.fillInStackTrace());
-			resp.getWriter().print(JsonUtil.returnJsonInfo(500, e.getMessage()));
+			print(JsonUtil.returnJsonInfo(500, e.fillInStackTrace().toString()), resp);
 		}
 	}
 	
@@ -82,7 +82,7 @@ public class ${table.entityName?cap_first}Action extends HttpServlet{
 	* @param req
 	* @param resp void
 	*/
-	void edit(HttpServletRequest req,HttpServletResponse resp) throws IOException{
+	void edit(HttpServletRequest req,HttpServletResponse resp) throws IOException, ServletException{
 		try {
 			String id = req.getParameter("id");
 			if(StringUtils.isNotBlank(id) && StringUtils.isNumber(id)){
@@ -92,7 +92,7 @@ public class ${table.entityName?cap_first}Action extends HttpServlet{
 			req.getRequestDispatcher(SysConstants.PAGE_BASE_PATH+actionFilePath+"/edit.jsp").forward(req, resp);
 		} catch (Exception e) {
 			CustomerLogUtil.${author}Log(logger, "到编辑页面出错，error："+e.getMessage(), e.fillInStackTrace());
-			resp.getWriter().print(JsonUtil.returnJsonInfo(500, e.getMessage()));
+			print(JsonUtil.returnJsonInfo(500, e.fillInStackTrace().toString()), resp);
 		}
 	}
 	
@@ -103,7 +103,7 @@ public class ${table.entityName?cap_first}Action extends HttpServlet{
 	* @param request
 	* @param response void
 	*/
-	void save(HttpServletRequest req,HttpServletResponse resp) throws IOException{
+	void save(HttpServletRequest req,HttpServletResponse resp) throws IOException, ServletException{
 		int code = 0;
 		String result = null;
 		try {
@@ -120,10 +120,10 @@ public class ${table.entityName?cap_first}Action extends HttpServlet{
 			code = 1;
 			result = JsonUtil.returnJsonInfo(code, "");
 		} catch (Exception e) {
-			result = JsonUtil.returnJsonInfo(500, e.getMessage());
+			result = JsonUtil.returnJsonInfo(500, e.fillInStackTrace().toString());
 			CustomerLogUtil.${author}Log(logger, "保存出错，error："+e.getMessage(), e.fillInStackTrace());
 		}
-		resp.getWriter().print(result);
+		print(result, resp);
 	}
 	
 	/** 
@@ -133,7 +133,7 @@ public class ${table.entityName?cap_first}Action extends HttpServlet{
 	* @param request
 	* @param response void
 	*/
-	void delete(HttpServletRequest req,HttpServletResponse resp) throws IOException{
+	void delete(HttpServletRequest req,HttpServletResponse resp) throws IOException, ServletException{
 		PrintWriter out = resp.getWriter();
 		String id = req.getParameter("id");
 		String result = null;
@@ -144,10 +144,10 @@ public class ${table.entityName?cap_first}Action extends HttpServlet{
 				code = n > 0 ? 1 : 0;
 				result = JsonUtil.returnJsonInfo(code, "");
 			}  catch (Exception e) {
-				result = JsonUtil.returnJsonInfo(500, e.getMessage());
+				result = JsonUtil.returnJsonInfo(500, e.fillInStackTrace().toString());
 				CustomerLogUtil.${author}Log(logger, "删除出错，error："+e.getMessage(), e.fillInStackTrace());
 			}
 		}
-		out.print(result);
+		print(result, resp);
 	}
 }
