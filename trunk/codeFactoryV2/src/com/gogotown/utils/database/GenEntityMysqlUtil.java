@@ -16,7 +16,7 @@ import com.gogotown.commons.Constans;
 import com.gogotown.entity.DbEntity;
 import com.gogotown.entity.FileEntity;
 import com.gogotown.entity.TableEntity;
-import com.gogotown.utils.GoGoStringUtil;
+import com.gogotown.utils.StringUtil;
 
 /**   
 * @Title: GenEntityMysqlUtil.java 
@@ -101,7 +101,7 @@ public class GenEntityMysqlUtil {
 			table.setPrimary_colmun(columnComments.get(Constans.PRIMARY_COLUMN_TAB));
 			String projectPath = fileEntity.getProjectPath();
 				projectPath = projectPath + ((projectPath.endsWith("/") || projectPath.endsWith("\\")) ? "java" : "/java");
-				String document = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_MODEL);
+				String document = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_MODEL);
 				File d_file = new File(document);
 				if(!d_file.exists()) d_file.mkdirs();
 				String outputPath = document+initcap(tablename) + ".java";

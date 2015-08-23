@@ -9,7 +9,7 @@ import com.gogotown.entity.CodeEntity;
 import com.gogotown.entity.FileEntity;
 import com.gogotown.entity.FlagEntity;
 import com.gogotown.entity.TableEntity;
-import com.gogotown.utils.GoGoStringUtil;
+import com.gogotown.utils.StringUtil;
 import com.gogotown.utils.freemarker.FreemarkerUtil;
 
 /**   
@@ -35,7 +35,7 @@ public class CreateCodeUtil {
 			String entityName = table.getEntityName();
 			if(null != fileEntity){
 				//AdminAction
-				String bigEntityName = GoGoStringUtil.firstChar2Up(entityName);
+				String bigEntityName = StringUtil.firstChar2Up(entityName);
 				//封装datamap实体类
 				CodeEntity codeEntity = new CodeEntity(table, fileEntity.getBasePackage(),fileEntity.getAuthorName());
 				Map<String, Object> datamap = ObjectMapUtil.obj2Map(codeEntity);
@@ -43,22 +43,22 @@ public class CreateCodeUtil {
 				projectPath = projectPath + ((projectPath.endsWith("/") || projectPath.endsWith("\\")) ? "java" : "/java");
 				if(flagEntity.isCreateDao()){
 					//Dao
-					String document_dao = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_DAO);
+					String document_dao = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_DAO);
 					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_DAO,document_dao,bigEntityName+"Dao.java",datamap,fileEntity);
 				}
 				if(flagEntity.isCreatePropertie()){
 					//XxDao.properties
-					String document_dao = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_DAO);
+					String document_dao = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_DAO);
 					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_PROPERTIE,document_dao,bigEntityName+"Dao.properties",datamap,fileEntity);
 				}
 				if(flagEntity.isCreateService()){
 					//Service
-					String document_service = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_SERVICE);
+					String document_service = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_SERVICE);
 					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_SERVICE,document_service,bigEntityName+"Service.java",datamap,fileEntity);
 				}
 				if(flagEntity.isCreateAction()){
 					//Action
-					String document_Action = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_ACTION);
+					String document_Action = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_ACTION);
 					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_ACTION,document_Action,bigEntityName+"Action.java",datamap,fileEntity);
 				}
 			}
