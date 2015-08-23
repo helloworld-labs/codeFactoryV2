@@ -15,7 +15,7 @@ import com.gogotown.commons.Constans;
 import com.gogotown.entity.FileEntity;
 import com.gogotown.entity.FlagEntity;
 import com.gogotown.entity.TableEntity;
-import com.gogotown.utils.GoGoStringUtil;
+import com.gogotown.utils.StringUtil;
 
 public class XmlUtil {
 	
@@ -81,10 +81,10 @@ public class XmlUtil {
 	*/
 	public static void createWebXml(TableEntity table,FileEntity fileEntity,FlagEntity flagEntity) throws Exception{
 		if(fileEntity != null && flagEntity.isCreateWebXml()){
-			String servletName = GoGoStringUtil.firstChar2Up(table.getEntityName());
-			String urlPattern = GoGoStringUtil.firstChar2Little(table.getEntityName());
+			String servletName = StringUtil.firstChar2Up(table.getEntityName());
+			String urlPattern = StringUtil.firstChar2Little(table.getEntityName());
 			String fullClassPath = fileEntity.getBasePackage()+ "." +Constans.TYPE_ACTION+"."+ servletName +"Action";
-			String xmlPath =  GoGoStringUtil.getFilePath(fileEntity.getProjectPath(), Constans.WEB_XML_PATH, "web.xml");
+			String xmlPath =  StringUtil.getFilePath(fileEntity.getProjectPath(), Constans.WEB_XML_PATH, "web.xml");
 			File xmlFile = new File(xmlPath);
 			if(xmlFile.exists()){
 				if(xmlPath.endsWith("/"))  xmlPath = xmlPath.substring(0, xmlPath.length()-1);

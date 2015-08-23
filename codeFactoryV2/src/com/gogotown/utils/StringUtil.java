@@ -1,5 +1,8 @@
 package com.gogotown.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**   
 * @Title: GoGoStringUtil.java 
 * @Package com.gogotown.utils 
@@ -8,7 +11,7 @@ package com.gogotown.utils;
 * @date 2014-12-22 上午10:19:23 
 * @version V1.0   
 */
-public class GoGoStringUtil {
+public class StringUtil {
 	
 	public static boolean isNotBlank(String str){
 		if(null != str && "" != str){
@@ -68,5 +71,31 @@ public class GoGoStringUtil {
 	public static void main(String[] args) {
 		String str = getFilePath("e:/project/abc/", "com.gogotown.manage", "model");
 		System.out.println(str);
+	}
+	
+	/** 
+	* @author hezhoujun
+	* @Title: stringToList 
+	* @Description: 将字符串根据分隔符转化为list
+	* @param specialString
+	* @param prefix 分隔符
+	* @return List<Integer>
+	*/
+	public static List<String> stringToList(String specialString,String prefix){
+		List<String> list = null;
+		if(isNotBlank(specialString) && isNotBlank(prefix)){
+			list = new ArrayList<String>();
+			if(specialString.indexOf(prefix) > 0){
+				String[] strArr = specialString.split(prefix);
+				if(null != strArr && strArr.length > 0 ){
+					for (String string : strArr) {
+						list.add(string);
+					}
+				}
+			}else{
+				list.add(specialString);
+			}
+		}
+		return list;
 	}
 }

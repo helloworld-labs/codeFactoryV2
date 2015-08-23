@@ -11,7 +11,7 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
-import com.gogotown.utils.GoGoStringUtil;
+import com.gogotown.utils.StringUtil;
 import com.gogotown.utils.database.GenEntityMysqlUtil;
 
 public class SpringXmlUtil {
@@ -87,7 +87,7 @@ public class SpringXmlUtil {
 		if("dao".equals(type)){
 			attrName = attrRef = "sqlSessionFactory";
 		}
-		if(GoGoStringUtil.isNotBlank(className) && GoGoStringUtil.isNotBlank(beanName) && GoGoStringUtil.isNotBlank(xmlPath) && GoGoStringUtil.isNotBlank(attrName) && GoGoStringUtil.isNotBlank(attrRef) && GoGoStringUtil.isNotBlank(type)){
+		if(StringUtil.isNotBlank(className) && StringUtil.isNotBlank(beanName) && StringUtil.isNotBlank(xmlPath) && StringUtil.isNotBlank(attrName) && StringUtil.isNotBlank(attrRef) && StringUtil.isNotBlank(type)){
 			info = new SpringXmlUtil().updateDaoServiceXml(className, beanName, xmlPath, attrName, attrRef, type);
 		}else{
 			info = "failed:参数传输不完整";

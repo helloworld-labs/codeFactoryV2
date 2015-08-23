@@ -13,7 +13,7 @@ import com.gogotown.entity.DbEntity;
 import com.gogotown.entity.FileEntity;
 import com.gogotown.entity.PojoEntity;
 import com.gogotown.entity.TableEntity;
-import com.gogotown.utils.GoGoStringUtil;
+import com.gogotown.utils.StringUtil;
 import com.gogotown.utils.freemarker.FreemarkerUtil;
 
 /**   
@@ -102,7 +102,7 @@ public class CreateEntityUtil {
 			table.setPrimary_colmun(primary_colmun);
 			String projectPath = fileEntity.getProjectPath();
 				projectPath = projectPath + ((projectPath.endsWith("/") || projectPath.endsWith("\\")) ? "java" : "/java");
-				String document = GoGoStringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_MODEL);
+				String document = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_MODEL);
 				String entityName = initcap(tablename);
 				PojoEntity pojoEntity = new PojoEntity(fileEntity.getBasePackage(), fileEntity.getAuthorName(),table);
 				Map<String, Object> datamap = ObjectMapUtil.obj2Map(pojoEntity);
