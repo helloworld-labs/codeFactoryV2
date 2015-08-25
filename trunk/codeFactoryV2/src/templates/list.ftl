@@ -57,7 +57,7 @@
     <ul class="pagination">
 		  <!-- 分页 -->
 		  <pg:pager url="list.do" maxPageItems="${r"$"}{resultData.pageSize }" items="${r"$"}{resultData.total}" export="currentPageNumber=pageNumber" scope="request" >
-		  <pg:param name="pageSize" value="${r"$"}{resultData.mem.pageSize}" />
+		  <pg:param name="pager.pagesize" value="${r"$"}{resultData.pageSize}" />
 		  <jsp:include page="../commons/pager.jsp"/>
     	  </pg:pager>
 	  </ul>
