@@ -52,7 +52,7 @@ public class ${table.entityName?cap_first}Service {
 		try {
 			int count = ${table.entityName?cap_first}Dao.qryListObjectCount(${table.entityName?cap_first}.class, maps);
 			int offset =Pager.getOffest();
-			int pagesize =(int) maps.get("pageSize");
+			int pagesize =Pager.getPageSize();
 			int current = offset / pagesize +1;
 			int pages = count%pagesize == 0 ? count / pagesize : count/pagesize +1;
 			maps.put("currentPage", Pager.getOffest());
