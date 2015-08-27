@@ -41,7 +41,11 @@ public interface Constans {
 	String TEMPLATE_EDIT = "edit.ftl";
 	String TEMPLATE_ENTITY = "entity.ftl";
 	String TEMPLATE_PROPERTIE = "propertie.ftl";
+	String TEMPLATE_I_SERVICE = "iservice.ftl";
+	String TEMPATE_I_DAO = "idao.ftl";
+	String TEMPLATE_MAPPER = "mapper.ftl";
 	
 	String WEB_XML_PATH = "webapp.WEB-INF";
 	String WEB_JSP_PATH = "webapp.WEB-INF.views";
+	String XML_SPRING_DAO_PATH = "resource";
 }

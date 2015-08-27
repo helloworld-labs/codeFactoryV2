@@ -96,7 +96,7 @@ public class XmlUtil {
 					System.err.println("对应["+servletName+"]的值，已经在"+xmlPath+" 中配置了..");
 				}
 			}else{
-				System.err.println("web.xml不存在");
+				System.err.println("web.xml:"+xmlPath+"不存在");
 			}
 		}
 	}

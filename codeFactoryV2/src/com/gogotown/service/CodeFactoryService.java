@@ -7,6 +7,7 @@ import com.gogotown.entity.TableEntity;
 import com.gogotown.utils.code.CreateCodeUtil;
 import com.gogotown.utils.database.CreateEntityUtil;
 import com.gogotown.utils.page.CreatePateUtil;
+import com.gogotown.utils.xml.SpringXmlUtil;
 import com.gogotown.utils.xml.XmlUtil;
 
 public class CodeFactoryService {
@@ -29,6 +30,8 @@ public class CodeFactoryService {
 		CreatePateUtil.createPage(table, fileEntity,flagEntity);
 		//web.xml
 		XmlUtil.createWebXml(table,fileEntity,flagEntity);
+		//spring-dao spring-service xml
+		SpringXmlUtil.createDaoServiceXml(fileEntity, flagEntity, table);
 	}
 	
 	public static void main(String[] args){
