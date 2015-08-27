@@ -27,6 +27,7 @@
      <#if table.primary_colmun != table.fieldNames[i_index]>
         <tr>
             <td  class="text-r" style="width: 15%">${table.remaks[i_index]}</td>
+            <#if table.fieldNames[i_index] != 'createdate' || table.fieldNames[i_index] != 'changedate'>
             <td>
         		<#if table.filedTypes[i_index] != "Date" && table.colSizes[i_index] &lt; 10000>
 		     	<input type="text" style="width:20%" name="${table.fieldNames[i_index]}"  placeholder="请输入${table.fieldNames[i_index]}" value="${r"${"}${table.entityName?uncap_first}.${table.fieldNames[i_index]}}" class="form-control"/>
@@ -38,6 +39,7 @@
 		     	<textarea id="xh_editor" name="${table.fieldNames[i_index]}" cols="100" rows="8" style="width:98%;height:300px;visibility:hidden;">${r"${"}${table.entityName?uncap_first}.${table.fieldNames[i_index]}}</textarea>
 		     	</#if>
             </td>
+            </#if>
         </tr>
       </#if>
 	</#list>
