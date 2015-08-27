@@ -1,5 +1,6 @@
 package com.gogotown.utils.xml;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -11,11 +12,30 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
+import com.gogotown.commons.Constans;
+import com.gogotown.entity.FileEntity;
+import com.gogotown.entity.FlagEntity;
+import com.gogotown.entity.TableEntity;
 import com.gogotown.utils.StringUtil;
 import com.gogotown.utils.database.GenEntityMysqlUtil;
 
 public class SpringXmlUtil {
-	
+	/** 
+	* @author hezhoujun
+	* @Title: getClassNameByType 
+	* @Description: 获取classesName
+	* @param pakage
+	* @param entityName
+	* @param type
+	* @return String
+	*/
+	private static String getClassNameByType(String pakage,String entityName,String type){
+		if("dao".equals(type)){
+			return pakage.replaceAll("/", ".") +".dao.impl."+ entityName+"DAOImpl";
+		}else{
+			return pakage.replaceAll("/", ".") +".service.impl."+ entityName+"ServiceImpl";
+		}
+	}
 	/** 
 	* @author hezhoujun
 	* @Title: updateDaoServiceXml 
@@ -29,45 +49,46 @@ public class SpringXmlUtil {
 	* @return String 处理结果
 	*/
 	@SuppressWarnings("unchecked")
-	public String updateDaoServiceXml(String className,String beanName,String xmlPath,String attrName,String attrRef,String type){
-		String info = "";
+	public void updateDaoServiceXml(String className,String beanName,String xmlPath,String attrName,String attrRef,String type){
 		SAXReader reader = new SAXReader(); 
 		   Document doc;
 		try {
-			doc = reader.read(xmlPath);
-			Element rootElement = doc.getRootElement(); 
-			Element addressElement = rootElement.addElement("bean");
-			List<Element> nodes = rootElement.elements("bean");
-			boolean createFlag = true;
-			for (Element element : nodes) {
-				if(beanName.equals(element.attributeValue("id"))){
-					createFlag = false;
+			File xmlFile = new File(xmlPath);
+			if(xmlFile.exists()){
+				doc = reader.read(xmlPath);
+				Element rootElement = doc.getRootElement(); 
+				Element addressElement = rootElement.addElement("bean");
+				List<Element> nodes = rootElement.elements("bean");
+				boolean createFlag = true;
+				for (Element element : nodes) {
+					if(beanName.equals(element.attributeValue("id"))){
+						createFlag = false;
+					}
 				}
-			}
-			if(createFlag){
-				addressElement.addAttribute("id", beanName);
-				addressElement.addAttribute("class", className);
-				Element child = addressElement.addElement("property");
-				child.addAttribute("name", attrName);
-				child.addAttribute("ref", attrRef);
-//				OutputFormat format = new OutputFormat();
-				OutputFormat format = OutputFormat.createPrettyPrint();// 创建文件输出的时候，自动缩进的格式
-				format.setEncoding("UTF-8");
-				XMLWriter writer = new XMLWriter(new FileWriter(xmlPath), format);
-				writer.write(doc);
-				writer.close();
-				info = "success:处理dao & service xml成功";
+				if(createFlag){
+					addressElement.addAttribute("id", beanName);
+					addressElement.addAttribute("class", className);
+					Element child = addressElement.addElement("property");
+					child.addAttribute("name", attrName);
+					child.addAttribute("ref", attrRef);
+//					OutputFormat format = new OutputFormat();
+					OutputFormat format = OutputFormat.createPrettyPrint();// 创建文件输出的时候，自动缩进的格式
+					format.setEncoding("UTF-8");
+					XMLWriter writer = new XMLWriter(new FileWriter(xmlPath), format);
+					writer.write(doc);
+					writer.close();
+					System.out.println("处理xml： "+xmlPath+" 成功");
+				}else{
+					System.err.println("对应["+beanName+"]的值，已经在"+xmlPath+" 中配置了..");
+				}
 			}else{
-				info = "success:对应的bean的id已经存在";
+				System.err.println("xml： "+xmlPath+" 不存在");
 			}
 		} catch (DocumentException e) {
-			info = "failed:出现异常："+e.getMessage();
 			e.printStackTrace();
 		} catch (IOException e) {
-			info = "failed:出现异常："+e.getMessage();
 			e.printStackTrace();
 		} 
-		return info;
 	}
 	
 	/** 
@@ -82,17 +103,15 @@ public class SpringXmlUtil {
 	* @param type 类型 dao or service
 	* @return String 处理结果
 	*/
-	public static String updateXmlRun(String className,String beanName,String xmlPath,String attrName,String attrRef,String type){
-		String info = "";
+	public static void updateXmlRun(String className,String beanName,String xmlPath,String attrName,String attrRef,String type){
 		if("dao".equals(type)){
 			attrName = attrRef = "sqlSessionFactory";
 		}
 		if(StringUtil.isNotBlank(className) && StringUtil.isNotBlank(beanName) && StringUtil.isNotBlank(xmlPath) && StringUtil.isNotBlank(attrName) && StringUtil.isNotBlank(attrRef) && StringUtil.isNotBlank(type)){
-			info = new SpringXmlUtil().updateDaoServiceXml(className, beanName, xmlPath, attrName, attrRef, type);
+			new SpringXmlUtil().updateDaoServiceXml(className, beanName, xmlPath, attrName, attrRef, type);
 		}else{
-			info = "failed:参数传输不完整";
+			System.err.println("生成spring dao service xml参数不完整..");
 		}
-		return info;
 	}
 	
 	/**
@@ -143,6 +162,27 @@ public class SpringXmlUtil {
 			e.printStackTrace();
 		} 
 		return info;
+	}
+	
+	/** 
+	* @author hezhoujun
+	* @Title: createDaoServiceXml 
+	* @Description: 创建dao service xml
+	* @param fileEntity
+	* @param flag
+	* @param table void
+	*/
+	public static void createDaoServiceXml(FileEntity fileEntity,FlagEntity flag,TableEntity table){
+		if(fileEntity != null && flag.isCreateDaoServiceXml()){
+			String bigFirstName = StringUtil.firstChar2Up(table.getEntityName());
+			String littleFirstName = StringUtil.firstChar2Little(table.getEntityName());
+			String springXmlPath =  StringUtil.getFilePath(fileEntity.getProjectPath(), Constans.XML_SPRING_DAO_PATH, "spring-service.xml");
+			String springDaoPath =  StringUtil.getFilePath(fileEntity.getProjectPath(), Constans.XML_SPRING_DAO_PATH, "spring-dao.xml");
+			String daoClassName = getClassNameByType(fileEntity.getBasePackage(), bigFirstName, "dao");
+			updateXmlRun(daoClassName, bigFirstName+"DAOImpl", springDaoPath, null, null, "dao");
+			String serviceClassName = getClassNameByType(fileEntity.getBasePackage(), bigFirstName, "service");
+			updateXmlRun(serviceClassName, bigFirstName+"ServiceImpl", springXmlPath, littleFirstName+"DAO", bigFirstName+"DAOImpl", "service");
+		}
 	}
 	
 	public static void main(String[] args) {

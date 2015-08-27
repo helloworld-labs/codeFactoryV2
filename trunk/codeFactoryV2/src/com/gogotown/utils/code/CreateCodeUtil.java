@@ -42,9 +42,9 @@ public class CreateCodeUtil {
 				String projectPath = fileEntity.getProjectPath();
 				projectPath = projectPath + ((projectPath.endsWith("/") || projectPath.endsWith("\\")) ? "java" : "/java");
 				if(flagEntity.isCreateDao()){
-					//Dao
-					String document_dao = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_DAO);
-					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_DAO,document_dao,bigEntityName+"Dao.java",datamap,fileEntity);
+					//DaoImpl
+					String document_dao = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_DAO+"/impl");
+					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_DAO,document_dao,bigEntityName+"DAOImpl.java",datamap,fileEntity);
 				}
 				if(flagEntity.isCreatePropertie()){
 					//XxDao.properties
@@ -52,14 +52,29 @@ public class CreateCodeUtil {
 					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_PROPERTIE,document_dao,bigEntityName+"Dao.properties",datamap,fileEntity);
 				}
 				if(flagEntity.isCreateService()){
-					//Service
-					String document_service = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_SERVICE);
-					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_SERVICE,document_service,bigEntityName+"Service.java",datamap,fileEntity);
+					//ServiceImpl
+					String document_service = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_SERVICE+"/impl");
+					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_SERVICE,document_service,bigEntityName+"ServiceImpl.java",datamap,fileEntity);
 				}
 				if(flagEntity.isCreateAction()){
 					//Action
 					String document_Action = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_ACTION);
 					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_ACTION,document_Action,bigEntityName+"Action.java",datamap,fileEntity);
+				}
+				if(flagEntity.isCreateIDao()){
+					//idao
+					String i_document_dao = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_DAO);
+					FreemarkerUtil.analysisTemplate(Constans.TEMPATE_I_DAO,i_document_dao,"I"+bigEntityName+"Dao.java",datamap,fileEntity);
+				}
+				if(flagEntity.isCreateIservice()){
+					//iservice
+					String i_document_service = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_SERVICE);
+					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_I_SERVICE,i_document_service,"I"+bigEntityName+"Service.java",datamap,fileEntity);
+				}
+				if(flagEntity.isCreateMapperXml()){
+					//mapper
+					String document = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_MODEL);
+					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_MAPPER,document,bigEntityName+"Mapper.xml",datamap,fileEntity);
 				}
 			}
 		} catch (IOException e) {

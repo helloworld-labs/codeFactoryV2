@@ -19,8 +19,17 @@ public class FlagEntity {
 	private boolean isCreateWebXml = true;
 	 /**@Fields isCreatePage : 是否创建jsp页面*/ 
 	private boolean isCreatePage = true;
+	//===========以下添加的属性，默认不生成，为true才生成======
 	 /**@Fields isCreatePropertie : 是否生成xxDao.properties 默认不生成*/ 
 	private boolean isCreatePropertie = false;
+	 /**@Fields isCreateIDao : 是否创建dao接口*/ 
+	private boolean  isCreateIDao = false;
+	 /**@Fields isCreateIservice : 是否创建service接口*/ 
+	private boolean isCreateIservice = false;
+	 /**@Fields isCreateDaoXml : 是否生成spring-dao.xml中的映射*/ 
+	private boolean isCreateDaoServiceXml = false;
+	 /**@Fields isCreateMapperXml : 是否创建mapper文件*/ 
+	private boolean isCreateMapperXml = false;
 	
 	public boolean isCreateDao() {
 		return isCreateDao;
@@ -57,6 +66,30 @@ public class FlagEntity {
 	}
 	public void setCreatePropertie(boolean isCreatePropertie) {
 		this.isCreatePropertie = isCreatePropertie;
+	}
+	public boolean isCreateIDao() {
+		return isCreateIDao;
+	}
+	public void setCreateIDao(boolean isCreateIDao) {
+		this.isCreateIDao = isCreateIDao;
+	}
+	public boolean isCreateIservice() {
+		return isCreateIservice;
+	}
+	public void setCreateIservice(boolean isCreateIservice) {
+		this.isCreateIservice = isCreateIservice;
+	}
+	public boolean isCreateDaoServiceXml() {
+		return isCreateDaoServiceXml;
+	}
+	public void setCreateDaoServiceXml(boolean isCreateDaoServiceXml) {
+		this.isCreateDaoServiceXml = isCreateDaoServiceXml;
+	}
+	public boolean isCreateMapperXml() {
+		return isCreateMapperXml;
+	}
+	public void setCreateMapperXml(boolean isCreateMapperXml) {
+		this.isCreateMapperXml = isCreateMapperXml;
 	}
 	
 }
