@@ -42,9 +42,11 @@ public class CreateCodeUtil {
 				String projectPath = fileEntity.getProjectPath();
 				projectPath = projectPath + ((projectPath.endsWith("/") || projectPath.endsWith("\\")) ? "java" : "/java");
 				if(flagEntity.isCreateDao()){
-					//DaoImpl
-					String document_dao = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_DAO+"/impl");
-					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_DAO,document_dao,bigEntityName+"DAOImpl.java",datamap,fileEntity);
+					//DaoImpl or Dao
+					String packagePath = flagEntity.isCreateMapperXml() ? Constans.TYPE_DAO+"/impl" : Constans.TYPE_DAO;
+					String lastName = flagEntity.isCreateMapperXml() ? "DAOImpl.java" : "Dao.java";
+					String document_dao = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), packagePath);
+					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_DAO,document_dao,bigEntityName+lastName,datamap,fileEntity);
 				}
 				if(flagEntity.isCreatePropertie()){
 					//XxDao.properties
@@ -52,9 +54,11 @@ public class CreateCodeUtil {
 					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_PROPERTIE,document_dao,bigEntityName+"Dao.properties",datamap,fileEntity);
 				}
 				if(flagEntity.isCreateService()){
-					//ServiceImpl
-					String document_service = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), Constans.TYPE_SERVICE+"/impl");
-					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_SERVICE,document_service,bigEntityName+"ServiceImpl.java",datamap,fileEntity);
+					//ServiceImpl or Service
+					String packagePath = flagEntity.isCreateMapperXml() ? Constans.TYPE_SERVICE+"/impl" : Constans.TYPE_SERVICE;
+					String document_service = StringUtil.getFilePath(projectPath, fileEntity.getBasePackage(), packagePath);
+					String lastName = flagEntity.isCreateMapperXml() ? "ServiceImpl.java" : "Service.java";
+					FreemarkerUtil.analysisTemplate(Constans.TEMPLATE_SERVICE,document_service,bigEntityName+lastName,datamap,fileEntity);
 				}
 				if(flagEntity.isCreateAction()){
 					//Action
