@@ -43,8 +43,8 @@
       </#list>
       <td >
       	<div class="btn-group" role="group" >				      		      		 
-      	    <a class="btn btn-link"  href="javascript:del('${r"$"}{obj.${table.primary_colmun} }');" role="button" ><span class="glyphicon glyphicon-trash"></span></a>		         	   
-      	    <a class="btn btn-link" href="edit?id=${r"$"}{obj.${table.primary_colmun?if_exists}}&operation=edit" role="button"><span class="glyphicon glyphicon-edit"></span></a>
+      	    <a class="btn btn-link"  href="javascript:del('${r"$"}{obj.${table.primary_colmun} }');" role="button" title="删除"><span class="glyphicon glyphicon-trash"></span></a>		         	   
+      	    <a class="btn btn-link" href="edit?id=${r"$"}{obj.${table.primary_colmun?if_exists}}&operation=edit" role="button" title="编辑"><span class="glyphicon glyphicon-edit"></span></a>
   			</div>
       </td>
     </tr>
