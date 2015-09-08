@@ -50,7 +50,7 @@ public class ${table.entityName} extends BaseBean{
 
 	public String toString() {
 	StringBuilder sb = new StringBuilder();
-	sb.append("GAdmin[");
+	sb.append("${table.entityName}[");
 	<#list table.fieldNames as field>
 	if(null != ${field?uncap_first} && !"".equals(${field?uncap_first}) ){
 		sb.append("${field?uncap_first}= "+${field?uncap_first}+",");

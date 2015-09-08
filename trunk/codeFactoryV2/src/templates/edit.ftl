@@ -30,7 +30,7 @@
             <#if table.fieldNames[i_index] != 'createdate' || table.fieldNames[i_index] != 'changedate'>
             <td>
         		<#if table.filedTypes[i_index] != "Date" && table.colSizes[i_index] &lt; 10000>
-		     	<input type="text" style="width:20%" name="${table.fieldNames[i_index]}"  placeholder="请输入${table.fieldNames[i_index]}" value="${r"${"}${table.entityName?uncap_first}.${table.fieldNames[i_index]}}" class="form-control"/>
+		     	<input type="text" style="width:20%" name="${table.fieldNames[i_index]}"  placeholder="请输入${table.remaks[i_index]}" value="${r"${"}${table.entityName?uncap_first}.${table.fieldNames[i_index]}}" class="form-control"/>
 		     	</#if>
 		     	<#if table.filedTypes[i_index] == "Date">
 		     	<input type="text" style="width:20%;height:33px;" onClick="WdatePicker()"  name="${table.fieldNames[i_index]}"  placeholder="日期" value="<fmt:formatDate value="${r"${"}${table.entityName?uncap_first}.${table.fieldNames[i_index]}}" pattern="yyyy-MM-dd HH:mm:ss"/>" class="form-control Wdate"/>
