@@ -36,6 +36,9 @@ public class MySqlTabComUtil {
                 Statement stmt = conn.createStatement();
                 for(int i = 0; i < tableName.size(); i++) {
                         String table = (String)tableName.get(i);
+                        if("order".equals(table)){
+                        	table = "`order`";
+                        }
                         ResultSet rs = stmt.executeQuery("SHOW CREATE TABLE " + table);
                         if(rs != null && rs.next()) {
                                 String create = rs.getString(2);
